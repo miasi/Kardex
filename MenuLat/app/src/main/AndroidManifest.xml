@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.isaimrafael.menulat" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MenuLateral.header"
+            android:label="@string/title_activity_header" >
+        </activity>
+        <activity
+            android:name=".MenuLateral.itm"
+            android:label="@string/title_activity_itm" >
+        </activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.isaimrafael.menulat.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Mapa"
+            android:label="@string/title_activity_mapa"
+            android:parentActivityName=".Main2Activity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.isaimrafael.menulat.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".Calificaciones"
+            android:label="@string/title_activity_calificaciones"
+            android:parentActivityName=".Main2Activity"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".Horario"
+            android:label="@string/title_activity_horario"
+            android:parentActivityName=".Main2Activity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.isaimrafael.menulat.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".HorarioMa"
+            android:label="@string/title_activity_horario_ma"
+            android:parentActivityName=".Main2Activity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.isaimrafael.menulat.Main2Activity" />
+        </activity>
+    </application>
+
+</manifest>
