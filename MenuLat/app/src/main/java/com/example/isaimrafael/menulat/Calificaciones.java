@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,11 +26,23 @@ public class Calificaciones extends AppCompatActivity implements AdapterView.OnI
     private ArrayList<item_objct> NavItms;
     private TypedArray NavIcons;
     NavigationAdapter NavAdapter;
+
     //endregion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calificaciones);
+
+        GridView gv = (GridView) findViewById(R.id.gridView);
+        gv.setAdapter(new StrAdapter(this));
+
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(Calificaciones.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         CreadorMenu();
     }
 
@@ -61,55 +74,47 @@ public class Calificaciones extends AppCompatActivity implements AdapterView.OnI
     }
 
     private void CreaActivities(int pos) {
-        switch (pos)
-        {
+        switch (pos) {
             //inicio
-            case 1:
-            {
+            case 1: {
                 break;
             }
             //Calificaciones
-            case 2:
-            {
+            case 2: {
                 break;
             }
             //Horario
-            case 3:
-            {
+            case 3: {
                 break;
             }
             //Horario Maestros
-            case 4:
-            {
+            case 4: {
                 break;
             }
             //Mapa
-            case 5:
-            {
+            case 5: {
                 break;
             }
             //Salir
-            case 6:
-            {
+            case 6: {
                 break;
             }
         }
-        Toast toast = Toast.makeText(Calificaciones.this, titulos[pos-1], Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(Calificaciones.this, titulos[pos - 1], Toast.LENGTH_SHORT);
         toast.show();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
-                if (NavDrawerLayout.isDrawerOpen(NavList)){
+                if (NavDrawerLayout.isDrawerOpen(NavList)) {
                     NavDrawerLayout.closeDrawers();
-                }else {
+                } else {
                     NavDrawerLayout.openDrawer(NavList);
                 }
                 return true;
