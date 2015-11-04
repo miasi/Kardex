@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private EditText control, contra;
     private Button acceder;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         contra = (EditText)findViewById(R.id.editText2);
         acceder = (Button)findViewById(R.id.button);
         acceder.setOnClickListener(AccederOnClickLister);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.logotit);
     }
 
     OnClickListener AccederOnClickLister = new OnClickListener() {
@@ -42,4 +43,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }
+

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MenuLat</string>
+    <string name="app_name">Bienvenidos al ITLP</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -26,7 +26,7 @@
     </array>
     <string name="title_activity_main2">Bienvenido(a)</string>
     <string name="title_activity_mapa">Mapa ITLP</string>
-    <string name="title_activity_calificaciones">Calificaciones</string>
+    <string name="title_activity_calificaciones">Cursando</string>
     <string name="title_activity_horario">Horario</string>
     <string name="title_activity_horario_ma">HorarioMa</string>
 </resources>
