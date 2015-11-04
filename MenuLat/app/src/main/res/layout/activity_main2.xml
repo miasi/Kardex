@@ -31,7 +31,7 @@
         android:choiceMode="singleChoice"
         android:divider="#feffffff"
         android:dividerHeight="2dp"
-        android:background="@drawable/fondomenuu"
+        android:background="@drawable/fondomenu"
         android:textColor="#476ac2"
         />
 </android.support.v4.widget.DrawerLayout>
