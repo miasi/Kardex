@@ -8,7 +8,7 @@
 
     <string-array name="nav_options">
         <item> Inicio </item>
-        <item> Calificaciones </item>
+        <item> Cursando </item>
         <item> Horario</item>
         <item> Horario Ma. </item>
         <item> Mapa </item>
