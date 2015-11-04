@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -83,10 +82,10 @@ public class HorarioMa extends AppCompatActivity implements AdapterView.OnItemCl
             {
                 break;
             }
-            //Calificaciones
+            //Cursando
             case 2:
             {
-                Intent i = new Intent(HorarioMa.this, Calificaciones.class);
+                Intent i = new Intent(HorarioMa.this, Cursando.class);
                 startActivity(i);
                 break;
             }
@@ -107,14 +106,14 @@ public class HorarioMa extends AppCompatActivity implements AdapterView.OnItemCl
             //Mapa
             case 5:
             {
-                Intent i = new Intent(HorarioMa.this, Mapa.class);
+                Intent i = new Intent(HorarioMa.this, MapaTec.class);
                 startActivity(i);
                 break;
             }
             //Salir
             case 6:
             {
-                Intent i = new Intent(HorarioMa.this, MainActivity.class);
+                Intent i = new Intent(HorarioMa.this, Login.class);
                 startActivity(i);
                 break;
             }

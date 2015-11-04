@@ -1,5 +1,6 @@
 package com.example.isaimrafael.menulat;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +8,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.example.isaimrafael.menulat.MenuLateral.NavigationAdapter;
 import com.example.isaimrafael.menulat.MenuLateral.item_objct;
+
 import java.util.ArrayList;
 
-public class Mapa extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Cursando extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     //region VariablesMenu
     private String[] titulos;
@@ -22,16 +26,27 @@ public class Mapa extends AppCompatActivity implements AdapterView.OnItemClickLi
     private ArrayList<item_objct> NavItms;
     private TypedArray NavIcons;
     NavigationAdapter NavAdapter;
-    //endregion
 
+    //endregion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mapa);
+        setContentView(R.layout.calificaciones);
+
+        GridView gv = (GridView) findViewById(R.id.gridView);
+        gv.setAdapter(new StrAdapter(this));
+
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(Cursando.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         CreadorMenu();
     }
 
-    //region Menu
+    //region MenuLateral
     public void CreadorMenu() {
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
@@ -59,55 +74,50 @@ public class Mapa extends AppCompatActivity implements AdapterView.OnItemClickLi
     }
 
     private void CreaActivities(int pos) {
-        switch (pos)
-        {
+        switch (pos) {
             //inicio
-            case 1:
-            {
+            case 1: {
                 break;
             }
-            //Calificaciones
-            case 2:
-            {
+            //Cursando
+            case 2: {
                 break;
             }
             //Horario
-            case 3:
-            {
+            case 3: {
                 break;
             }
             //Horario Maestros
-            case 4:
-            {
+            case 4: {
                 break;
             }
             //Mapa
-            case 5:
-            {
+            case 5: {
+                Intent i = new Intent(Cursando.this, MapaTec.class);
+                startActivity(i);
+
                 break;
             }
             //Salir
-            case 6:
-            {
+            case 6: {
                 break;
             }
         }
-        Toast toast = Toast.makeText(Mapa.this, titulos[pos-1], Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(Cursando.this, titulos[pos - 1], Toast.LENGTH_SHORT);
         toast.show();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
-                if (NavDrawerLayout.isDrawerOpen(NavList)){
+                if (NavDrawerLayout.isDrawerOpen(NavList)) {
                     NavDrawerLayout.closeDrawers();
-                }else {
+                } else {
                     NavDrawerLayout.openDrawer(NavList);
                 }
                 return true;
@@ -115,7 +125,4 @@ public class Mapa extends AppCompatActivity implements AdapterView.OnItemClickLi
         return super.onOptionsItemSelected(item);
     }
     //endregion
-
-
-
 }

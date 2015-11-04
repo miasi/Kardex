@@ -1,23 +1,20 @@
 package com.example.isaimrafael.menulat;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.example.isaimrafael.menulat.MenuLateral.NavigationAdapter;
 import com.example.isaimrafael.menulat.MenuLateral.item_objct;
-
 import java.util.ArrayList;
 
-public class Calificaciones extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Menu extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     //region VariablesMenu
     private String[] titulos;
@@ -26,27 +23,29 @@ public class Calificaciones extends AppCompatActivity implements AdapterView.OnI
     private ArrayList<item_objct> NavItms;
     private TypedArray NavIcons;
     NavigationAdapter NavAdapter;
-
     //endregion
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calificaciones);
-
-        GridView gv = (GridView) findViewById(R.id.gridView);
-        gv.setAdapter(new StrAdapter(this));
-
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Calificaciones.this, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        setContentView(R.layout.activity_main2);
         CreadorMenu();
     }
 
-    //region MenuLateral
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                if (NavDrawerLayout.isDrawerOpen(NavList)){
+                    NavDrawerLayout.closeDrawers();
+                }else {
+                    NavDrawerLayout.openDrawer(NavList);
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void CreadorMenu() {
         NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
@@ -74,52 +73,55 @@ public class Calificaciones extends AppCompatActivity implements AdapterView.OnI
     }
 
     private void CreaActivities(int pos) {
-        switch (pos) {
+        switch (pos)
+        {
             //inicio
-            case 1: {
+            case 1:
+            {
                 break;
             }
-            //Calificaciones
-            case 2: {
+            //Cursando
+            case 2:
+            {
+                Intent i = new Intent(Menu.this, Cursando.class);
+                startActivity(i);
                 break;
             }
             //Horario
-            case 3: {
+            case 3:
+            {
+                Intent i = new Intent(Menu.this, Horario.class);
+                startActivity(i);
                 break;
             }
             //Horario Maestros
-            case 4: {
+            case 4:
+            {
+                Intent i = new Intent(Menu.this, HorarioMa.class);
+                startActivity(i);
                 break;
             }
             //Mapa
-            case 5: {
+            case 5:
+            {
+                Intent i = new Intent(Menu.this, MapaTec.class);
+                startActivity(i);
                 break;
             }
             //Salir
-            case 6: {
+            case 6:
+            {
+                Intent i = new Intent(Menu.this, Login.class);
+                startActivity(i);
                 break;
             }
         }
-        Toast toast = Toast.makeText(Calificaciones.this, titulos[pos - 1], Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(Menu.this, titulos[pos-1], Toast.LENGTH_SHORT);
         toast.show();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (NavDrawerLayout.isDrawerOpen(NavList)) {
-                    NavDrawerLayout.closeDrawers();
-                } else {
-                    NavDrawerLayout.openDrawer(NavList);
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
-    //endregion
 }

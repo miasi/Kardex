@@ -1,5 +1,6 @@
 package com.example.isaimrafael.menulat;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -68,7 +69,7 @@ public class Horario extends AppCompatActivity implements AdapterView.OnItemClic
             {
                 break;
             }
-            //Calificaciones
+            //Cursando
             case 2:
             {
                 break;
@@ -86,6 +87,7 @@ public class Horario extends AppCompatActivity implements AdapterView.OnItemClic
             //Mapa
             case 5:
             {
+                Intent i = new Intent(Horario.this, MapaTec.class);
                 break;
             }
             //Salir
