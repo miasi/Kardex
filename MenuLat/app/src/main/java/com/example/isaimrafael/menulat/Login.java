@@ -18,7 +18,7 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
         control = (EditText)findViewById(R.id.editText);
         contra = (EditText)findViewById(R.id.editText2);
         acceder = (Button)findViewById(R.id.button);
@@ -34,14 +34,21 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemClickL
         }
     };
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, (android.view.Menu) menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }
 

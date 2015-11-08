@@ -24,19 +24,24 @@ public class MapaTec extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        int display_mode = getResources().getConfiguration().orientation;
         GoogleMap mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         LatLng Tec = new LatLng(24.119780, -110.308746);//24.119780, -110.308746
         //mapa.addMarker(new MarkerOptions().position(Tec).title("Instituto Tecnologico De La Paz"));
-        CameraPosition campos = new CameraPosition.Builder()
-                .target(Tec)
-                .zoom(17)
-                .bearing(95)
-                .build();
-        CameraUpdate camu = CameraUpdateFactory.newCameraPosition(campos);
-        mapa.animateCamera(camu);
-        //mapa.clear();
-        puntosTec();
+        if (display_mode==1) {
+            CameraPosition campos = new CameraPosition.Builder()
+                    .target(Tec)
+                    .zoom(17)
+                    .bearing(95)
+                    .build();
+            CameraUpdate camu = CameraUpdateFactory.newCameraPosition(campos);
+            mapa.animateCamera(camu);
+            //mapa.clear();
+            puntosTec();
+        }else{
+
+        }
     }
 
     public void puntosTec()
