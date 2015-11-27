@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">KardexV1.1</string>
+    <string name="title_activity_menues">Menues</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_mapa">Map</string>
+    <string name="title_activity_cursando">Cursando</string>
+    <string name="title_activity_horario">Horario</string>
+    <string name="title_activity_horario_maestro">HorarioMaestro</string>
+    <string name="section_title">hello</string>
+    <string name="section_format">Horario del dia: </string>
+    <string name="title_activity_unidades">Unidades</string>
+    <string name="title_activity_foro">Foro</string>
+</resources> <!-- %1$d -->
