@@ -1,6 +1,5 @@
 package com.example.isaimrafael.kardexv11;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -15,12 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.isaimrafael.kardexv11.web_service.ws_info_alumno;
 import com.example.isaimrafael.kardexv11.web_service.ws_login;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-
-import java.util.Objects;
 
 public class Principal extends AppCompatActivity {
 

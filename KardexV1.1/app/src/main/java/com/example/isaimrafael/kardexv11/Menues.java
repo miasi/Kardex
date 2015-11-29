@@ -5,21 +5,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.isaimrafael.kardexv11.web_service.ws_info_alumno;
+import com.example.isaimrafael.kardexv11.web_service.ws_alumno;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +32,8 @@ public class Menues extends AppCompatActivity
     TextView nomalum,nomcarrera, nombre, carrera, semestre, creditos;
     ImageView logo;
 
+    ws_alumno alumno;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,7 @@ public class Menues extends AppCompatActivity
         SalvaLogin();
     }
 
-    private void SalvaLogin(){
+    private void SalvaLogin() {
         BaseDatos = new LocalDB(this, "Temporales", null,1);
         db = BaseDatos.getWritableDatabase();
         Bundle b = getIntent().getExtras();
@@ -74,7 +72,9 @@ public class Menues extends AppCompatActivity
 
         @Override
         protected Object doInBackground(String... params) {
-            ws_info_alumno ws = new ws_info_alumno();
+            alumno = new ws_alumno(contr, pass);
+            int x = 5+5;
+            /*ws_alumno ws = new ws_alumno(contr, pass);
             res = ws.Cargador(contr,pass);
             char[] prube = res.toCharArray();
             String aux="", aux2="";
@@ -100,7 +100,7 @@ public class Menues extends AppCompatActivity
                         }
                     }
                 }
-            }
+            }*/
             return 1;
         }
 
@@ -120,12 +120,13 @@ public class Menues extends AppCompatActivity
             carrera = (TextView)findViewById(R.id.MENUnombreCarrera);
             semestre = (TextView)findViewById(R.id.MENUnombreSemestre);
             creditos = (TextView)findViewById(R.id.MENUCreditos);
-            nomalum.setText(valores.get(1));
-            nomcarrera.setText(valores.get(5).toLowerCase());
-            nombre.setText(valores.get(1));
-            carrera.setText(valores.get(5));
-            semestre.setText(valores.get(8));
-            creditos.setText(valores.get(9));
+
+            nomalum.setText(alumno.getNombre());
+            nomcarrera.setText(alumno.getEspecialidad().toLowerCase());
+            nombre.setText(String.valueOf(alumno.getCreditosAcumulados()));
+            carrera.setText(alumno.getEspecialidad());
+            semestre.setText(alumno.getSemestre());
+            creditos.setText(alumno.getNombre());
             if (nomcarrera.getText().equals("ingenieria en sistemas computacionales"))
                 logo.setImageResource(R.drawable.logo_sistemas);
             else if (nomcarrera.getText().equals("ingenieria civil"))

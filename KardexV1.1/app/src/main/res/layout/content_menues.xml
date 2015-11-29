@@ -33,7 +33,6 @@
     <TextView
         android:id="@+id/MENUnombreCarrera"
         android:layout_below="@id/formato2"
-        android:text="INGENIERIA EN SISTEMAS COMPUTACIONALES"
         android:layout_width="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:layout_height="wrap_content" />
@@ -48,7 +47,6 @@
     <TextView
         android:id="@+id/MENUnombreSemestre"
         android:layout_below="@id/formato3"
-        android:text="10"
         android:layout_width="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:layout_height="wrap_content" />
@@ -63,7 +61,6 @@
     <TextView
         android:id="@+id/MENUCreditos"
         android:layout_below="@id/formato4"
-        android:text="10"
         android:layout_width="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:layout_height="wrap_content" />
