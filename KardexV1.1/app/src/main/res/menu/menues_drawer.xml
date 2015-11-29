@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="Horarios y cursos">
+            <menu>
+                <item
+                    android:id="@+id/cursando"
+                    android:title="Cursando"
+                    android:icon="@drawable/ic_action_paste"/>
+                <item
+                    android:id="@+id/horario"
+                    android:title="Horario"
+                    android:icon="@drawable/ic_action_accept"/>
+                <item
+                    android:id="@+id/hoariomaestro"
+                    android:title="Horario maestros"
+                    android:icon="@drawable/ic_action_group"/>
+            </menu>
+        </item>
+        <item android:title="Ubicaciones">
+            <menu>
+                <item
+                    android:id="@+id/mapa"
+                    android:title="mapa"
+                    android:icon="@android:drawable/ic_menu_mylocation"/>
+            </menu>
+        </item>
+        <item android:title="Cerrar sesion">
+            <menu>
+                <item android:id="@+id/salir"
+                    android:title="Salir"
+                    android:icon="@drawable/ic_action_cancel"/>
+            </menu>
+        </item>
+</group>
+
+<!--item android:title="Opciones">
+    <menu>
+        <item android:id="@+id/nav_share"
+            android:title="Configuracion" />
+    </menu>
+</item-->
+
+</menu>
+
+    <!--android:icon="@android:drawable/ic_menu_manage"-->
