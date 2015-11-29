@@ -40,13 +40,8 @@ public class ws_alumno {
     public ws_alumno(String control, String passws) {
         try {
             String xml = getXML(control, passws);
-
             Document doc = readXML(xml);
-
-            //doc.getDocumentElement().normalize();
-            //XPath xPath = XPathFactory.newInstance().newXPath();
-            //String expression = "/soap:Envelope/soap:Body/consultarAlumnoResponse/consultarAlumnoResult";
-            NodeList list = doc.getElementsByTagName("consultarAlumnoResult");//(NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
+            NodeList list = doc.getElementsByTagName("consultarAlumnoResult");
             for (int i = 0; i < list.getLength(); i++) {
                 Element element = (Element) list.item(i);
                 control = element.getElementsByTagName("control").item(0).getTextContent();

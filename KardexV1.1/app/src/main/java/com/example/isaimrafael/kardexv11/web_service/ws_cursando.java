@@ -5,6 +5,16 @@ import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import java.io.StringReader;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Created by IsaimRafael on 27/11/2015.
@@ -15,33 +25,113 @@ public class ws_cursando {
     public final String WSDL_TARGET_NAMESPACE = "http://siia.itlp.edu.mx/";
     public final String SOAP_ADRESS = "http://siia.itlp.edu.mx/WebServiceITLP.asmx?WSDL";
 
-    public ws_cursando() {
+    private String alumno;
+    private String materia;
+    private String grupo;
+    private int año;
+    private String periodo;
+    private int calificacion;
+    private String tipodecurso;
+    private String clave;
+    private int creditos;
+    private List<ws_grupo> arregloCurso;
+
+    public ws_cursando(String control, String passws) {
+        try {
+            String xml = getXML(control, passws);
+            Document doc = readXML(xml);
+            NodeList list = doc.getElementsByTagName("consultarAlumnoResult");
+            for (int i = 0; i < list.getLength(); i++) {
+                Element element = (Element) list.item(i);
+                alumno = element.getElementsByTagName("control").item(0).getTextContent();
+                materia = element.getElementsByTagName("nombre").item(0).getTextContent();
+                grupo = element.getElementsByTagName("nombres").item(0).getTextContent();
+                año = Integer.parseInt(element.getElementsByTagName("apellido").item(0).getTextContent());
+                periodo = element.getElementsByTagName("sexo").item(0).getTextContent();
+                calificacion = Integer.parseInt(element.getElementsByTagName("semestre").item(0).getTextContent());
+                tipodecurso = element.getElementsByTagName("especialidad").item(0).getTextContent();
+                clave = element.getElementsByTagName("plan").item(0).getTextContent();
+                creditos = Integer.parseInt(element.getElementsByTagName("creditosAcumulados").item(0).getTextContent());
+                NodeList grupolis = doc.getElementsByTagName("Grupo");
+                for (int j=0; j < grupolis.getLength(); j++){
+                    Element gr = (Element)grupolis.item(j);
+                    arregloCurso.setMateria(gr.getElementsByTagName("materia").item(0).getTextContent());
+                }
+            }
+        } catch (Exception e) {
+        }
     }
 
-    public String Cargador(String control, String passWS){
-        SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
+    public String getMateria() {
+        return materia;
+    }
+
+    public int getAño() {
+        return año;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public List<ws_grupo> getArregloCurso() {
+        return arregloCurso;
+    }
+
+    public String getAlumno() {
+        return alumno;
+    }
+
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public String getXML(String control, String passws) {
+        SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE, OPERATION_NAME);
+
         PropertyInfo pi = new PropertyInfo();
         pi.setName("numeroDeControl");
         pi.setValue(control);
         pi.setType(String.class);
         request.addProperty(pi);
         pi = new PropertyInfo();
-        pi.setName("contraseña");
-        pi.setValue(passWS);
+        pi.setName("contrasena");
+        pi.setValue(passws);
         pi.setType(String.class);
         request.addProperty(pi);
+
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
         envelope.setOutputSoapObject(request);
 
         HttpTransportSE httpTransportSE = new HttpTransportSE(SOAP_ADRESS);
-        Object response = null;
-        try{
+        httpTransportSE.debug = true;
+        String xml = null;
+        try {
             httpTransportSE.call(SOAP_ACTION, envelope);
-            response = envelope.getResponse();
-        }catch (Exception e){
-            response = e.toString();
+            xml = httpTransportSE.responseDump;
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return response.toString();
+        return xml;
+    }
+
+    private Document readXML(String xml) throws Exception {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        InputSource source = new InputSource(new StringReader(xml));
+        return builder.parse(source);
     }
 }
