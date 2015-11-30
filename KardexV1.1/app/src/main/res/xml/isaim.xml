@@ -1,0 +1,207 @@
+<wsCurso>
+    <alumno>11310215</alumno>
+    <materia>AUDITORIA INFORMATICA</materia>
+    <grupo>K</grupo>
+    <anio>2015</anio>
+    <periodo>Agosto-Diciembre</periodo>
+    <calificacion>0</calificacion>
+    <tipoDeCurso>NORMAL</tipoDeCurso>
+    <clave>NTF-1301</clave>
+    <creditos>5</creditos>
+    <Grupo>
+        <materia>AUDITORIA INFORMATICA</materia>
+        <grupo>K</grupo>
+        <anio>2015</anio>
+        <carrera>INGENIERIA EN SISTEMAS COMPUTACIONALES</carrera>
+        <periodo>Agosto-Diciembre</periodo>
+        <plan>ISIC-2010-224</plan>
+        <claveOficial>NTF-1301</claveOficial>
+        <maestro>GABRIELA SANCHEZ MARTINEZ</maestro>
+        <horario>
+            <wsHorario>
+                <aula>MD5</aula>
+                <dia>MARTES</dia>
+                <horaInicio>16</horaInicio>
+                <horaFin>17</horaFin>
+            </wsHorario>
+            <wsHorario>
+                <aula>MD5</aula>
+                <dia>LUNES</dia>
+                <horaInicio>14</horaInicio>
+                <horaFin>15</horaFin>
+            </wsHorario>
+            <wsHorario>
+                <aula>MD5</aula>
+                <dia>LUNES</dia>
+                <horaInicio>15</horaInicio>
+                <horaFin>16</horaFin>
+            </wsHorario>
+            <wsHorario>
+                <aula>MD5</aula>
+                <dia>JUEVES</dia>
+                <horaInicio>14</horaInicio>
+                <horaFin>15</horaFin>
+            </wsHorario>
+            <wsHorario>
+                <aula>MD5</aula>
+                <dia>JUEVES</dia>
+                <horaInicio>15</horaInicio>
+                <horaFin>16</horaFin>
+            </wsHorario>
+        </horario>
+        <temas>
+            <wsTema>
+                <tema>1</tema>
+                <subTema>0</subTema>
+                <descripcion>Introducción a la auditoría informática.</descripcion>
+                <objetivos>Conocer los tipos de auditoría, modelos de control y responsabilidades de
+                    los involucrados en el proceso, para su aplicación en una Auditoría Informática.
+                </objetivos>
+                <criterios>
+                    <wsCriterio>
+                        <criterio>1</criterio>
+                        <descripcion>Trabajo de Inv.</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>100</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>2</criterio>
+                        <descripcion>Ensayo</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>100</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>3</criterio>
+                        <descripcion>Mapa conceptual</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>100</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>4</criterio>
+                        <descripcion>Examen</descripcion>
+                        <ponderacion>60</ponderacion>
+                        <calificacion>59</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>5</criterio>
+                        <descripcion>Participación</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>100</calificacion>
+                    </wsCriterio>
+                </criterios>
+            </wsTema>
+            <wsTema>
+                <tema>2</tema>
+                <subTema>0</subTema>
+                <descripcion>Planeación de la auditoría informática.</descripcion>
+                <objetivos>Realizar una investigación preliminar para llevar a cabo una adecuada
+                    planeación del proceso de auditoría.
+                </objetivos>
+                <criterios>
+                    <wsCriterio>
+                        <criterio>1</criterio>
+                        <descripcion>Trabajos</descripcion>
+                        <ponderacion>50</ponderacion>
+                        <calificacion>82</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>2</criterio>
+                        <descripcion>Examen</descripcion>
+                        <ponderacion>40</ponderacion>
+                        <calificacion>100</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>3</criterio>
+                        <descripcion>Participación</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>60</calificacion>
+                    </wsCriterio>
+                </criterios>
+            </wsTema>
+            <wsTema>
+                <tema>3</tema>
+                <subTema>0</subTema>
+                <descripcion>Auditoría de la Dirección Informática.</descripcion>
+                <objetivos>Analizar, diseñar y ejecutar un plan de Auditoría informática para
+                    evaluar la función de la dirección Informática.
+                </objetivos>
+                <criterios>
+                    <wsCriterio>
+                        <criterio>1</criterio>
+                        <descripcion>Trabajos</descripcion>
+                        <ponderacion>50</ponderacion>
+                        <calificacion>82</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>2</criterio>
+                        <descripcion>Examen</descripcion>
+                        <ponderacion>40</ponderacion>
+                        <calificacion>100</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>3</criterio>
+                        <descripcion>Participación</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>60</calificacion>
+                    </wsCriterio>
+                </criterios>
+            </wsTema>
+            <wsTema>
+                <tema>4</tema>
+                <subTema>0</subTema>
+                <descripcion>Evaluación de la seguridad.</descripcion>
+                <objetivos>Analizar, diseñar y ejecutar un plan de Auditoría Informática para
+                    evaluar las diferentes áreas de las TIC´s, determinando su grado de
+                    cumplimiento, eficacia y confiabilidad, en base a técnicas y herramientas
+                    adecuadas.
+                </objetivos>
+                <criterios>
+                    <wsCriterio>
+                        <criterio>1</criterio>
+                        <descripcion>Trabajos</descripcion>
+                        <ponderacion>40</ponderacion>
+                        <calificacion>0</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>2</criterio>
+                        <descripcion>Proyecto</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>0</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>3</criterio>
+                        <descripcion>Examen</descripcion>
+                        <ponderacion>40</ponderacion>
+                        <calificacion>0</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>4</criterio>
+                        <descripcion>Participación</descripcion>
+                        <ponderacion>10</ponderacion>
+                        <calificacion>0</calificacion>
+                    </wsCriterio>
+                </criterios>
+            </wsTema>
+            <wsTema>
+                <tema>5</tema>
+                <subTema>0</subTema>
+                <descripcion>Informe de la Auditoría Informática.</descripcion>
+                <objetivos />
+                <criterios>
+                    <wsCriterio>
+                        <criterio>1</criterio>
+                        <descripcion>Trabajo multimedia</descripcion>
+                        <ponderacion>50</ponderacion>
+                        <calificacion>0</calificacion>
+                    </wsCriterio>
+                    <wsCriterio>
+                        <criterio>2</criterio>
+                        <descripcion>Proyecto</descripcion>
+                        <ponderacion>50</ponderacion>
+                        <calificacion>0</calificacion>
+                    </wsCriterio>
+                </criterios>
+            </wsTema>
+        </temas>
+    </Grupo>
+</wsCurso>

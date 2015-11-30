@@ -1,9 +1,7 @@
 package com.example.isaimrafael.kardexv11.web_service;
 
-/**
- * Created by IsaimRafael on 28/11/2015.
- */
 public class ws_grupo {
+
     private String materia;
     private String grupo;
     private int año;
