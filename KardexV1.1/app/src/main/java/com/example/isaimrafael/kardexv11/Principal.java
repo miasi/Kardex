@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class Principal extends AppCompatActivity {
     private String res;
     private String passWS = "a8%x*5$d4#1";
     private int regresar = 0;
+    String obControl, obContra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class Principal extends AppCompatActivity {
     View.OnClickListener AccederOnClickLister = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            obControl = control.getText().toString();
+            obContra = contra.getText().toString().toUpperCase();
             online();
             new Descargar().execute("");
         }
@@ -49,8 +54,8 @@ public class Principal extends AppCompatActivity {
         @Override
         protected Object doInBackground(String... params) {
                 ws_login wss = new ws_login();
-                String cont = control.getText().toString();
-                String pass = MD5(cont + contra.getText().toString().toUpperCase() + "%1#5");
+                String cont = obControl;
+                String pass = MD5(cont + obContra + "%1#5");
                 res = wss.Cargador(cont, pass, passWS);
                 if (res.equals("true")) {
                     Intent i = new Intent(Principal.this, Menues.class);

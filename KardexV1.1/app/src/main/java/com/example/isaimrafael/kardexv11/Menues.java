@@ -29,7 +29,7 @@ public class Menues extends AppCompatActivity
     private String contr, pass;
     List<String> parametros = new ArrayList<String>();
     List<String> valores = new ArrayList<String>();
-    TextView nomalum,nomcarrera, nombre, carrera, semestre, creditos;
+    TextView nomalum,nomcarrera, nombre, carrera, semestre, creditos,modulo;
     ImageView logo;
 
     ws_alumno alumno;
@@ -120,13 +120,18 @@ public class Menues extends AppCompatActivity
             carrera = (TextView)findViewById(R.id.MENUnombreCarrera);
             semestre = (TextView)findViewById(R.id.MENUnombreSemestre);
             creditos = (TextView)findViewById(R.id.MENUCreditos);
+            modulo = (TextView)findViewById(R.id.MENUModulo);
 
             nomalum.setText(alumno.getNombre());
             nomcarrera.setText(alumno.getEspecialidad().toLowerCase());
-            nombre.setText(String.valueOf(alumno.getCreditosAcumulados()));
+
+            nombre.setText(alumno.getNombre());
             carrera.setText(alumno.getEspecialidad());
-            semestre.setText(alumno.getSemestre());
-            creditos.setText(alumno.getNombre());
+            semestre.setText(String.valueOf(alumno.getSemestre()));
+            creditos.setText(String.valueOf(alumno.getCreditosAcumulados()));
+            modulo.setText(alumno.getModulo());
+            if (modulo.getText().equals(""))
+                modulo.setText("MODULO DE ESPECIALIDAD SIN ASIGNAR");
             if (nomcarrera.getText().equals("ingenieria en sistemas computacionales"))
                 logo.setImageResource(R.drawable.logo_sistemas);
             else if (nomcarrera.getText().equals("ingenieria civil"))
@@ -198,12 +203,6 @@ public class Menues extends AppCompatActivity
 
         } else if (id == R.id.salir) {
             db.execSQL("DROP TABLE temporal;");
-            /*Intent intent = new Intent(Menues.this, Principal.class);
-            Bundle b = new Bundle();
-            String valuess="reset";
-            b.putString("Reset", valuess);
-            intent.putExtras(b);
-            startActivity(intent);*/
             finish();
         }
 

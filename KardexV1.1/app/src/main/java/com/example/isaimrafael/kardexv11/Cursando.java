@@ -31,6 +31,7 @@ public class Cursando extends AppCompatActivity {
     private String contr, pass;
     private ListView lista;
     TareaArrayAdapter<Tarea> adaptador;
+    ws_cursando cursando;
     String[] nombre = new String[]{"Dispositivos moviles","Aplicaciones Distribuidas",
             "Sistemas programables", "Auditoria","Graficacion"};
     String[] dias = new String[]{"LUN MAR MIE", "LUN JUE VIE", "LUN, MAR, JUE", "MIE JUE VIE","LUN, JUE VIE"};
@@ -81,8 +82,9 @@ public class Cursando extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(String... params) {
-            ws_cursando ws = new ws_cursando();
-            res = ws.Cargador(contr,pass);
+            cursando = new ws_cursando(contr,pass);
+            int val = cursando.valor();
+            int x = 1+1;
             return 1;
         }
     }

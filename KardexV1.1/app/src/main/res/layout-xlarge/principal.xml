@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:text="Acceder"
             android:id="@+id/button"
-            android:background="@drawable/botonpulsado"
+            android:background="@color/colorPrimary"
             android:textColor="#ffffff"
             android:layout_marginBottom="30dp"
             android:layout_below="@+id/editText2"

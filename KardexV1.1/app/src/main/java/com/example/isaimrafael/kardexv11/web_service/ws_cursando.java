@@ -1,5 +1,7 @@
 package com.example.isaimrafael.kardexv11.web_service;
 
+import android.support.annotation.NonNull;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -11,7 +13,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import java.io.StringReader;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,8 +25,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
  * Created by IsaimRafael on 27/11/2015.
  */
 public class ws_cursando {
-    public final String SOAP_ACTION = "http://siia.itlp.edu.mx/consultarCursanddo";
-    public final String OPERATION_NAME = "consultarCursanddo";
+    public final String SOAP_ACTION = "http://siia.itlp.edu.mx/consultarHistorialAcademico";
+    public final String OPERATION_NAME = "consultarHistorialAcademico";
     public final String WSDL_TARGET_NAMESPACE = "http://siia.itlp.edu.mx/";
     public final String SOAP_ADRESS = "http://siia.itlp.edu.mx/WebServiceITLP.asmx?WSDL";
 
@@ -38,28 +43,34 @@ public class ws_cursando {
 
     public ws_cursando(String control, String passws) {
         try {
+            int val = valor();
             String xml = getXML(control, passws);
             Document doc = readXML(xml);
-            NodeList list = doc.getElementsByTagName("consultarAlumnoResult");
+            NodeList list = doc.getElementsByTagName("consultarCursanddoResult");
             for (int i = 0; i < list.getLength(); i++) {
                 Element element = (Element) list.item(i);
-                alumno = element.getElementsByTagName("control").item(0).getTextContent();
-                materia = element.getElementsByTagName("nombre").item(0).getTextContent();
-                grupo = element.getElementsByTagName("nombres").item(0).getTextContent();
-                año = Integer.parseInt(element.getElementsByTagName("apellido").item(0).getTextContent());
-                periodo = element.getElementsByTagName("sexo").item(0).getTextContent();
-                calificacion = Integer.parseInt(element.getElementsByTagName("semestre").item(0).getTextContent());
-                tipodecurso = element.getElementsByTagName("especialidad").item(0).getTextContent();
-                clave = element.getElementsByTagName("plan").item(0).getTextContent();
-                creditos = Integer.parseInt(element.getElementsByTagName("creditosAcumulados").item(0).getTextContent());
+                alumno = element.getElementsByTagName("alumno").item(0).getTextContent();
+                materia = element.getElementsByTagName("materia").item(0).getTextContent();
+                grupo = element.getElementsByTagName("grupo").item(0).getTextContent();
+                año = Integer.parseInt(element.getElementsByTagName("año").item(0).getTextContent());
+                periodo = element.getElementsByTagName("periodo").item(0).getTextContent();
+                calificacion = Integer.parseInt(element.getElementsByTagName("calificacion").item(0).getTextContent());
+                tipodecurso = element.getElementsByTagName("tipoDeCurso").item(0).getTextContent();
+                clave = element.getElementsByTagName("clave").item(0).getTextContent();
+                creditos = Integer.parseInt(element.getElementsByTagName("creditos").item(0).getTextContent());
                 NodeList grupolis = doc.getElementsByTagName("Grupo");
                 for (int j=0; j < grupolis.getLength(); j++){
                     Element gr = (Element)grupolis.item(j);
-                    arregloCurso.setMateria(gr.getElementsByTagName("materia").item(0).getTextContent());
+                    //arregloCurso.setMateria(gr.getElementsByTagName("materia").item(0).getTextContent());
+                    //arregloCurso.add(gr.getElementsByTagName("materia").item(gr).getTextContent());
                 }
             }
         } catch (Exception e) {
         }
+    }
+
+    public int valor(){
+        return 1;
     }
 
     public String getMateria() {
@@ -107,13 +118,14 @@ public class ws_cursando {
         pi.setType(String.class);
         request.addProperty(pi);
         pi = new PropertyInfo();
-        pi.setName("contrasena");
+        pi.setName("contraseña");
         pi.setValue(passws);
         pi.setType(String.class);
         request.addProperty(pi);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
+        envelope.implicitTypes =true;
         envelope.setOutputSoapObject(request);
 
         HttpTransportSE httpTransportSE = new HttpTransportSE(SOAP_ADRESS);
