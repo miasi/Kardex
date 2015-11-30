@@ -29,41 +29,69 @@ public class ws_cursando {
     public ws_cursando(String control, String passws) {
         try {
             String xml = getXML(control, passws);
+
             Document doc = readXML(xml);
-            NodeList list = doc.getElementsByTagName("consultarCursanddoResult");
-            for (int i = 0; i < list.getLength(); i++) {
-                Element element = (Element) list.item(i);
+
+            NodeList lwsCurso = doc.getElementsByTagName("wsCurso");
+            for (int i = 0; i < lwsCurso.getLength(); i++) {
+                Element wsCurso = (Element) lwsCurso.item(i);
+
                 ws_curso curso = new ws_curso();
-                curso.setAlumno(element.getElementsByTagName("alumno").item(0).getTextContent());
-                curso.setMateria(element.getElementsByTagName("materia").item(0).getTextContent());
-                curso.setGrupo(element.getElementsByTagName("grupo").item(0).getTextContent());
-                curso.setAnio(Integer.parseInt(element.getElementsByTagName("anio").item(0).getTextContent()));
-                curso.setPeriodo(element.getElementsByTagName("periodo").item(0).getTextContent());
-                curso.setCalificacion(Integer.parseInt(element.getElementsByTagName("calificacion").item(0).getTextContent()));
-                curso.setTipoDeCurso(element.getElementsByTagName("tipoDeCurso").item(0).getTextContent());
-                curso.setClave(element.getElementsByTagName("clave").item(0).getTextContent());
-                curso.setCreditos(Integer.parseInt(element.getElementsByTagName("creditos").item(0).getTextContent()));
-                NodeList grupolis = doc.getElementsByTagName("Grupo");
-                for (int j = 0; j < grupolis.getLength(); j++) {
-                    Element gr = (Element) grupolis.item(j);
+                curso.setAlumno(wsCurso.getElementsByTagName("alumno").item(0).getTextContent());
+                curso.setMateria(wsCurso.getElementsByTagName("materia").item(0).getTextContent());
+                curso.setGrupo(wsCurso.getElementsByTagName("grupo").item(0).getTextContent());
+                curso.setAnio(Integer.parseInt(wsCurso.getElementsByTagName("anio").item(0).getTextContent()));
+                curso.setPeriodo(wsCurso.getElementsByTagName("periodo").item(0).getTextContent());
+                curso.setCalificacion(Integer.parseInt(wsCurso.getElementsByTagName("calificacion").item(0).getTextContent()));
+                curso.setTipoDeCurso(wsCurso.getElementsByTagName("tipoDeCurso").item(0).getTextContent());
+                curso.setClave(wsCurso.getElementsByTagName("clave").item(0).getTextContent());
+                curso.setCreditos(Integer.parseInt(wsCurso.getElementsByTagName("creditos").item(0).getTextContent()));
+
+                NodeList lwsGrupo = wsCurso.getElementsByTagName("Grupo");
+                for (int j = 0; j < lwsGrupo.getLength(); j++) {
+                    Element wsGrupo = (Element) lwsGrupo.item(j);
+
                     ws_grupo grupo = new ws_grupo();
-                    grupo.setMateria(gr.getElementsByTagName("materia").item(0).getTextContent());
-                    grupo.setGrupo(gr.getElementsByTagName("grupo").item(0).getTextContent());
-                    grupo.setAño(Integer.parseInt(gr.getElementsByTagName("anio").item(0).getTextContent()));
-                    grupo.setCarrera(gr.getElementsByTagName("carrera").item(0).getTextContent());
-                    grupo.setPeriodo(gr.getElementsByTagName("periodo").item(0).getTextContent());
-                    grupo.setPlan(gr.getElementsByTagName("plan").item(0).getTextContent());
-                    grupo.setClaveOficial(gr.getElementsByTagName("claveOficial").item(0).getTextContent());
-                    grupo.setMaestro(gr.getElementsByTagName("maestro").item(0).getTextContent());
-                    NodeList nHorario = doc.getElementsByTagName("horario");
-                    for (int k = 0; k < nHorario.getLength(); k++) {
-                        Element he = (Element) nHorario.item(k);
+                    grupo.setMateria(wsGrupo.getElementsByTagName("materia").item(0).getTextContent());
+                    grupo.setGrupo(wsGrupo.getElementsByTagName("grupo").item(0).getTextContent());
+                    grupo.setAño(Integer.parseInt(wsGrupo.getElementsByTagName("anio").item(0).getTextContent()));
+                    grupo.setCarrera(wsGrupo.getElementsByTagName("carrera").item(0).getTextContent());
+                    grupo.setPeriodo(wsGrupo.getElementsByTagName("periodo").item(0).getTextContent());
+                    grupo.setPlan(wsGrupo.getElementsByTagName("plan").item(0).getTextContent());
+                    grupo.setClaveOficial(wsGrupo.getElementsByTagName("claveOficial").item(0).getTextContent());
+                    grupo.setMaestro(wsGrupo.getElementsByTagName("maestro").item(0).getTextContent());
+
+                    NodeList lwsHorario = wsGrupo.getElementsByTagName("wsHorario");
+                    for (int k = 0; k < lwsHorario.getLength(); k++) {
+                        Element wsHorario = (Element) lwsHorario.item(k);
+
                         ws_horario horario = new ws_horario();
-                        horario.setAula(he.getElementsByTagName("aula").item(0).getTextContent());
-                        horario.setDia(he.getElementsByTagName("dia").item(0).getTextContent());
-                        horario.setHoraInicio(he.getElementsByTagName("horaInicio").item(0).getTextContent());
-                        horario.setHoraFin(he.getElementsByTagName("horaFin").item(0).getTextContent());
+                        horario.setAula(wsHorario.getElementsByTagName("aula").item(0).getTextContent());
+                        horario.setDia(wsHorario.getElementsByTagName("dia").item(0).getTextContent());
+                        horario.setHoraInicio(wsHorario.getElementsByTagName("horaInicio").item(0).getTextContent());
+                        horario.setHoraFin(wsHorario.getElementsByTagName("horaFin").item(0).getTextContent());
+
                         curso.getHorarios().add(horario);
+                    }
+
+                    NodeList lwsTema = wsGrupo.getElementsByTagName("wsTema");
+                    for (int k = 0; k < lwsTema.getLength(); k++) {
+                        Element wsTema = (Element) lwsTema.item(k);
+
+                        String nUnidad = wsTema.getElementsByTagName("tema").item(0).getTextContent();
+
+                        NodeList lwsCriterio = wsTema.getElementsByTagName("wsCriterio");
+                        for (int l = 0; l < lwsCriterio.getLength(); l++) {
+                            Element wsCriterio = (Element) lwsCriterio.item(l);
+
+                            ws_calificacion calificacion = new ws_calificacion();
+                            calificacion.setUnidad(nUnidad);
+                            calificacion.setCriterio(wsCriterio.getElementsByTagName("descripcion").item(0).getTextContent());
+                            calificacion.setPonderacion(Integer.parseInt(wsCriterio.getElementsByTagName("ponderacion").item(0).getTextContent()));
+                            calificacion.setCalificacion(Integer.parseInt(wsCriterio.getElementsByTagName("calificacion").item(0).getTextContent()));
+
+                            curso.getCalificaciones().add(calificacion);
+                        }
                     }
                     curso.getGrupos().add(grupo);
                 }
@@ -72,6 +100,14 @@ public class ws_cursando {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<ws_curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<ws_curso> cursos) {
+        this.cursos = cursos;
     }
 
     public String getXML(String control, String passws) {

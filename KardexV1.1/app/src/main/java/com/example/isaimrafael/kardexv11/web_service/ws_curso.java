@@ -16,6 +16,7 @@ public class ws_curso {
     private int creditos;
     private List<ws_grupo> grupos = new ArrayList<ws_grupo>();
     private List<ws_horario> horarios = new ArrayList<ws_horario>();
+    private List<ws_calificacion> calificaciones = new ArrayList<ws_calificacion>();
 
     public String getAlumno() {
         return alumno;
@@ -103,5 +104,13 @@ public class ws_curso {
 
     public void setHorarios(List<ws_horario> horarios) {
         this.horarios = horarios;
+    }
+
+    public List<ws_calificacion> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<ws_calificacion> calificaciones) {
+        this.calificaciones = calificaciones;
     }
 }
