@@ -21,6 +21,7 @@ import com.example.isaimrafael.kardexv11.rellena_materias_horario.TareaArrayAdap
 import com.example.isaimrafael.kardexv11.web_service.ws_cursando;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Cursando extends AppCompatActivity {
@@ -32,9 +33,8 @@ public class Cursando extends AppCompatActivity {
     private ListView lista;
     TareaArrayAdapter<Tarea> adaptador;
     ws_cursando cursando;
-    String[] nombre = new String[]{"Dispositivos moviles","Aplicaciones Distribuidas",
-            "Sistemas programables", "Auditoria","Graficacion"};
-    String[] dias = new String[]{"LUN MAR MIE", "LUN JUE VIE", "LUN, MAR, JUE", "MIE JUE VIE","LUN, JUE VIE"};
+    List<String> nombre = new ArrayList<>();
+    List<String> dias = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +43,6 @@ public class Cursando extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lista = (ListView)findViewById(R.id.listaCursando);
-        List<Tarea> TAREAS = new ArrayList<Tarea>();
-        for (int i=0; i < nombre.length; i++)
-            TAREAS.add(new Tarea(nombre[i], dias[i]));
-        adaptador = new TareaArrayAdapter<Tarea>(Cursando.this, TAREAS);
-        lista.setAdapter(adaptador);
         lista.setOnItemClickListener(listaCursos);
         SalvaLogin();
     }
@@ -59,11 +54,11 @@ public class Cursando extends AppCompatActivity {
         if (b!= null) {
             contr = b.getString("control");
             pass = b.getString("passWS");
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporalDos (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporalDos (control, passw) VALUES ('"+contr+"','"+pass+"');");
             new descargar().execute("");
         }else{
-            String query = "SELECT * FROM temporal;";
+            String query = "SELECT * FROM temporalDos;";
             Cursor cs = db.rawQuery(query,null);
             if (db!= null){
                 if (cs.moveToFirst()){
@@ -72,7 +67,7 @@ public class Cursando extends AppCompatActivity {
                         pass = cs.getString(1);
                     }while (cs.moveToNext());
                 }
-                db.execSQL("DROP TABLE temporal;");
+                db.execSQL("DROP TABLE IF EXISTS temporalDos;");
                 new descargar().execute("");
             }
         }
@@ -86,17 +81,62 @@ public class Cursando extends AppCompatActivity {
             int r = 1+1;
             return 1;
         }
+
+        @Override
+        protected void onPostExecute(Object result){
+            try {
+                int val = cursando.getCursos().size();
+                String aux="";
+                List<String> auxiliar = new ArrayList<>();
+                for (int i = 0; i < val; i++) {
+                    nombre.add(cursando.getCursos().get(i).getMateria());
+                    int val2 = cursando.getCursos().get(i).getHorarios().size();
+                    for (int j=0; j < val2;j++){
+                        auxiliar.add(cursando.getCursos().get(i).getHorarios().get(j).getDia());
+                    }
+                    aux = EraseElements(auxiliar);
+                    dias.add(aux);
+                    auxiliar.clear();
+                }
+                List<Tarea> TAREAS = new ArrayList<Tarea>();
+                for (int i=0; i < nombre.size(); i++)
+                    TAREAS.add(new Tarea(nombre.get(i), dias.get(i)));
+                adaptador = new TareaArrayAdapter<Tarea>(Cursando.this, TAREAS);
+                lista.setAdapter(adaptador);
+                super.onPostExecute(result);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        private String EraseElements(List<String> auxiliar){
+            HashSet hs = new HashSet();
+            hs.addAll(auxiliar);
+            auxiliar.clear();
+            auxiliar.addAll(hs);
+            String valores="";
+            for (int i=0; i < auxiliar.size();i++){
+                valores+= auxiliar.get(i)+" ";
+            }
+            return valores;
+        }
     }
 
     AdapterView.OnItemClickListener listaCursos = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             try {
+                db.execSQL("CREATE TABLE IF NOT EXISTS temporalDos (control TEXT, passw TEXT)");
+                db.execSQL("INSERT INTO temporalDos (control, passw) VALUES ('"+contr+"','"+pass+"');");
                 Tarea num = (Tarea)lista.getItemAtPosition(position);
+                int val = position;
                 String nombre = num.getNombre();
                 Intent i = new Intent(Cursando.this, Unidades.class);
                 Bundle b = new Bundle();
                 b.putString("nombre", nombre);
+                b.putInt("valor", val);
+                b.putString("contras", pass);
+                b.putString("control", contr);
                 i.putExtras(b);
                 startActivity(i);
             }catch (Exception e){

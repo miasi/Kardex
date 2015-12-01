@@ -150,6 +150,8 @@ public class Menues extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cursando) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
             i = new Intent(Menues.this, Cursando.class);
             Bundle b = new Bundle();
             b.putString("control", contr);
@@ -162,7 +164,13 @@ public class Menues extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.hoariomaestro) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
             i = new Intent(Menues.this, HorarioMaestro.class);
+            Bundle b = new Bundle();
+            b.putString("control", contr);
+            b.putString("passWS", pass);
+            i.putExtras(b);
             startActivity(i);
 
         } else if (id == R.id.mapa) {
