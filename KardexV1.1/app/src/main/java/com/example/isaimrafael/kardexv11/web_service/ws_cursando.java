@@ -19,10 +19,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class ws_cursando {
 
-    public final String SOAP_ACTION = "http://siia.itlp.edu.mx/consultarCursanddo";
-    public final String OPERATION_NAME = "consultarCursanddo";
-    public final String WSDL_TARGET_NAMESPACE = "http://siia.itlp.edu.mx/";
-    public final String SOAP_ADRESS = "http://siia.itlp.edu.mx/WebServiceITLP.asmx?WSDL";
+    private final String SOAP_ACTION = "http://siia.itlp.edu.mx/consultarCursanddo";
+    private final String OPERATION_NAME = "consultarCursanddo";
+    private final String WSDL_TARGET_NAMESPACE = "http://siia.itlp.edu.mx/";
+    private final String SOAP_ADRESS = "http://siia.itlp.edu.mx/WebServiceITLP.asmx?WSDL";
 
     private List<ws_curso> cursos = new ArrayList<ws_curso>();
 

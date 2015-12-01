@@ -2,11 +2,8 @@ package com.example.isaimrafael.kardexv11;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.example.isaimrafael.kardexv11.web_service.ws_cursando;
 import com.example.isaimrafael.kardexv11.web_service.ws_horario_maestro;
@@ -20,6 +17,7 @@ public class HorarioMaestro extends AppCompatActivity {
     ws_cursando cursando;
     ws_horario_maestro maestros;
     List<String> nombreMaestro = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +40,10 @@ public class HorarioMaestro extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Object result){
+        protected void onPostExecute(Object result) {
             int val = cursando.getCursos().size();
-            for (int i=0; i < val;i++){
-                    nombreMaestro.add(cursando.getCursos().get(i).getGrupos().get(0).getMaestro());
+            for (int i = 0; i < val; i++) {
+                nombreMaestro.add(cursando.getCursos().get(i).getGrupos().get(0).getMaestro());
             }
             new descargarWSMaestro().execute("");
             super.onPostExecute(result);
@@ -61,9 +59,8 @@ public class HorarioMaestro extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Object result){
+        protected void onPostExecute(Object result) {
             super.onPostExecute(result);
         }
     }
-
 }

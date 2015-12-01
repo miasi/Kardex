@@ -11,26 +11,45 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-/**
- * Created by IsaimRafael on 30/11/2015.
- */
 public class ws_horario_maestro {
+
     public final String SOAP_ACTION = "http://siia.itlp.edu.mx/consultarHorarioDocente";
     public final String OPERATION_NAME = "consultarHorarioDocente";
     public final String WSDL_TARGET_NAMESPACE = "http://siia.itlp.edu.mx/";
     public final String SOAP_ADRESS = "http://siia.itlp.edu.mx/WebServiceITLP.asmx?WSDL";
 
+    private List<ws_horario_maestro_personal> horariosMaestros = new ArrayList<ws_horario_maestro_personal>();
+
     public ws_horario_maestro(String control, String passws) {
         try {
             String xml = getXML(control, passws);
             Document doc = readXML(xml);
-            NodeList list = doc.getElementsByTagName("consultarHorarioDocente");
+            NodeList lwsHoraPersonal = doc.getElementsByTagName("wsHoraPersonal");
+            for (int i = 0; i < lwsHoraPersonal.getLength(); i++) {
+                Element wsHoraPersonal = (Element) lwsHoraPersonal.item(i);
+
+                ws_horario_maestro_personal horarioMaestro = new ws_horario_maestro_personal();
+                horarioMaestro.setDia(wsHoraPersonal.getElementsByTagName("dia").item(0).getTextContent());
+                horarioMaestro.setHora(wsHoraPersonal.getElementsByTagName("hora").item(0).getTextContent());
+                horarioMaestro.setLugar(wsHoraPersonal.getElementsByTagName("lugar").item(0).getTextContent());
+            }
         } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    public List<ws_horario_maestro_personal> getHorariosMaestros() {
+        return horariosMaestros;
+    }
+
+    public void setHorariosMaestros(List<ws_horario_maestro_personal> horariosMaestros) {
+        this.horariosMaestros = horariosMaestros;
     }
 
     public String getXML(String control, String passws) {
@@ -70,4 +89,3 @@ public class ws_horario_maestro {
         return builder.parse(source);
     }
 }
-
