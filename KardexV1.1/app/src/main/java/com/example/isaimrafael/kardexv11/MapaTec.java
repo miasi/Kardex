@@ -73,93 +73,22 @@ public class MapaTec extends AppCompatActivity {
 
     public void puntosTec() {
         GoogleMap mapa2 = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        LatLng SalonesE = new LatLng(24.121190, -110.310249);
-        mapa2.addMarker(new MarkerOptions().position(SalonesE).title("Aulas D")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng SalonesD = new LatLng(24.120991, -110.310472);
-        mapa2.addMarker(new MarkerOptions().position(SalonesD).title("Aulas D")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng SalonesC = new LatLng(24.120719, -110.310536);
-        mapa2.addMarker(new MarkerOptions().position(SalonesC).title("Aulas C")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng SalonesB = new LatLng(24.120315, -110.310499);
-        mapa2.addMarker(new MarkerOptions().position(SalonesB).title("Aulas B")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng EdAdmin = new LatLng(24.120038, -110.310723);
-        mapa2.addMarker(new MarkerOptions().position(EdAdmin).title("Edificio administrativo")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        LatLng Biblio = new LatLng(24.119901, -110.310025);
-        mapa2.addMarker(new MarkerOptions().position(Biblio).title("Biblioteca")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        LatLng Macro = new LatLng(24.119062, -110.309047);
-        mapa2.addMarker(new MarkerOptions().position(Macro).title("Macrocentro")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng Posgrado = new LatLng(24.118994, -110.308519);
-        mapa2.addMarker(new MarkerOptions().position(Posgrado).title("Posgrado")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng Cafeteria = new LatLng(24.120060, -110.309591);
-        mapa2.addMarker(new MarkerOptions().position(Cafeteria).title("Cafeteria")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng capi = new LatLng(24.120400, -110.308397);
-        mapa2.addMarker(new MarkerOptions().position(capi).title("CAPI")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        LatLng gym = new LatLng(24.119783, -110.306045);
-        mapa2.addMarker(new MarkerOptions().position(gym).title("Gimnasio/Auditorio")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        LatLng civil = new LatLng(24.118890, -110.310451);
-        mapa2.addMarker(new MarkerOptions().position(civil).title("Lab. Ing. Civil")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        LatLng electro = new LatLng(24.120939, -110.309337);
-        mapa2.addMarker(new MarkerOptions().position(electro).title("Lab. Ing. Electromecanica")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        LatLng bioq = new LatLng(24.119201, -110.310511);
-        mapa2.addMarker(new MarkerOptions().position(bioq).title("Lab. Ing. Bioquimica")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        LatLng fisica = new LatLng(24.120071, -110.309014);
-        mapa2.addMarker(new MarkerOptions().position(fisica).title("Lab. de Fisica")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        LatLng ecoadmin = new LatLng(24.120957, -110.309835);
-        mapa2.addMarker(new MarkerOptions().position(ecoadmin).title("Lab. computo Economico/Administrativas")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        LatLng industrial = new LatLng(24.119914, -110.309351);
-        mapa2.addMarker(new MarkerOptions().position(industrial).title("Lab. Industrial")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        LatLng danza = new LatLng(24.120748, -110.308929);
-        mapa2.addMarker(new MarkerOptions().position(danza).title("Salon de danza")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng Ccomputo  = new LatLng(24.119637, -110.310185);
-        mapa2.addMarker(new MarkerOptions().position(Ccomputo).title("Centro de computo")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        LatLng pintura  = new LatLng(24.119569, -110.309806);
-        mapa2.addMarker(new MarkerOptions().position(pintura).title("Salon de pintura")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-        LatLng quimica = new LatLng(24.120608, -110.309344);
-        mapa2.addMarker(new MarkerOptions().position(quimica).title("Lab. de Quimica")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-        LatLng salonesS = new LatLng(24.119690, -110.309291);
-        mapa2.addMarker(new MarkerOptions().position(salonesS).title("Aulas S")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng ingenierias = new LatLng(24.119250, -110.309854);
-        mapa2.addMarker(new MarkerOptions().position(ingenierias).title("Depto. de ingenierias")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        LatLng SalonesH = new LatLng(24.119382, -110.310385);
-        mapa2.addMarker(new MarkerOptions().position(SalonesH).title("Aulas H")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        LatLng SalonesCS = new LatLng(24.118732, -110.308713);
-        mapa2.addMarker(new MarkerOptions().position(SalonesCS).title("Aulas CS")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        salones(mapa2);
+        Adminis(mapa2);
+        laboratorios(mapa2);
     }
 
     public void salones(GoogleMap mapa2){
 
         LatLng pintura  = new LatLng(24.119569, -110.309806);
-        mapa2.addMarker(new MarkerOptions().position(pintura).title("Salon de pintura")
+        mapa2.addMarker(new MarkerOptions().position(pintura).title("Taller de pintura")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        LatLng SalonesO  = new LatLng(24.120362, -110.309644);
+        mapa2.addMarker(new MarkerOptions().position(SalonesO).title("Aulas O")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         LatLng SalonesE = new LatLng(24.121190, -110.310249);
-        mapa2.addMarker(new MarkerOptions().position(SalonesE).title("Aulas D")
+        mapa2.addMarker(new MarkerOptions().position(SalonesE).title("Aulas E")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         LatLng SalonesD = new LatLng(24.120991, -110.310472);
@@ -188,11 +117,27 @@ public class MapaTec extends AppCompatActivity {
         LatLng SalonesCS = new LatLng(24.118732, -110.308713);
         mapa2.addMarker(new MarkerOptions().position(SalonesCS).title("Aulas CS")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        LatLng SalonesL = new LatLng(24.118695, -110.310174);
+        mapa2.addMarker(new MarkerOptions().position(SalonesL).title("Aulas L")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        LatLng salonT = new LatLng(24.120071, -110.309014);
+        mapa2.addMarker(new MarkerOptions().position(salonT).title("Aulas T")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
     }
 
     public void Adminis(GoogleMap mapa2){
         LatLng ingenierias = new LatLng(24.119250, -110.309854);
         mapa2.addMarker(new MarkerOptions().position(ingenierias).title("Depto. de ingenierias")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        LatLng cafeteria = new LatLng(24.120042, -110.309599);
+        mapa2.addMarker(new MarkerOptions().position(cafeteria).title("Cafeteria")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        LatLng incubadora = new LatLng(24.120339, -110.309218);
+        mapa2.addMarker(new MarkerOptions().position(incubadora).title("Incubadora de empresas")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        LatLng difusion = new LatLng(24.120782, -110.309042);
+        mapa2.addMarker(new MarkerOptions().position(difusion).title("Depto. de difusion y comunicación")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
         LatLng EdAdmin = new LatLng(24.120038, -110.310723);
@@ -238,6 +183,13 @@ public class MapaTec extends AppCompatActivity {
         LatLng quimica = new LatLng(24.120608, -110.309344);
         mapa2.addMarker(new MarkerOptions().position(quimica).title("Lab. de Quimica")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        LatLng computo = new LatLng(24.119027, -110.309870);
+        mapa2.addMarker(new MarkerOptions().position(computo).title("Lab. de Computo")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        LatLng biotecnologia = new LatLng(24.119378, -110.309535);
+        mapa2.addMarker(new MarkerOptions().position(biotecnologia).title("Lab. de Biotecnologia")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
     }
 
     @Override

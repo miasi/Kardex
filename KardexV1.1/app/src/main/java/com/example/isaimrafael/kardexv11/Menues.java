@@ -73,34 +73,6 @@ public class Menues extends AppCompatActivity
         @Override
         protected Object doInBackground(String... params) {
             alumno = new ws_alumno(contr, pass);
-            int x = 5+5;
-            /*ws_alumno ws = new ws_alumno(contr, pass);
-            res = ws.Cargador(contr,pass);
-            char[] prube = res.toCharArray();
-            String aux="", aux2="";
-            boolean band = false;
-            for (int i=0; i < res.length(); i++){
-                if (prube[i]=='{'){
-                    i++;
-                    while(prube[i]!='}' & !band){
-                        aux += prube[i];
-                        i++;
-                        if (prube[i]=='=') {
-                            i++;
-                            parametros.add(aux);
-                            aux="";
-                            while(prube[i]!=';'){
-                                aux2+= prube[i];
-                                i++;
-                            }
-                            i++;
-                            i++;
-                            valores.add(aux2);
-                            aux2="";
-                        }
-                    }
-                }
-            }*/
             return 1;
         }
 
@@ -202,7 +174,6 @@ public class Menues extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.salir) {
-            db.execSQL("DROP TABLE temporal;");
             finish();
         }
 
