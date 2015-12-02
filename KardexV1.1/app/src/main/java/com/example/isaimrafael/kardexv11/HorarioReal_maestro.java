@@ -69,11 +69,6 @@ public class HorarioReal_maestro extends AppCompatActivity {
         return list;
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
     public static class PlaceholderFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -205,7 +200,11 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     while (aux.getLugar().equals(auxLunes.get(i).getLugar()) && i < length) {
                         i++;
                     }
-                    aux.setHoraFin(auxLunes.get(i - 1).getHora());
+                    if (i < length) {
+                        aux.setHoraFin(auxLunes.get(i - 1).getHora());
+                    } else {
+                        aux.setHoraFin(auxLunes.get(i).getHora());
+                    }
                     lunes.add(aux);
                 } while (i < length);
             }
@@ -221,7 +220,11 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     while (aux.getLugar().equals(auxMartes.get(i).getLugar()) && i < length) {
                         i++;
                     }
-                    aux.setHoraFin(auxMartes.get(i - 1).getHora());
+                    if (i < length) {
+                        aux.setHoraFin(auxMartes.get(i - 1).getHora());
+                    } else {
+                        aux.setHoraFin(auxMartes.get(i).getHora());
+                    }
                     martes.add(aux);
                 } while (i < length);
             }
@@ -237,7 +240,11 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     while (aux.getLugar().equals(auxMiercoles.get(i).getLugar()) && i < length) {
                         i++;
                     }
-                    aux.setHoraFin(auxMiercoles.get(i - 1).getHora());
+                    if (i < length) {
+                        aux.setHoraFin(auxMiercoles.get(i - 1).getHora());
+                    } else {
+                        aux.setHoraFin(auxMiercoles.get(i).getHora());
+                    }
                     miercoles.add(aux);
                 } while (i < length);
             }
@@ -253,7 +260,11 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     while (aux.getLugar().equals(auxJueves.get(i).getLugar()) && i < length) {
                         i++;
                     }
-                    aux.setHoraFin(auxJueves.get(i - 1).getHora());
+                    if (i < length) {
+                        aux.setHoraFin(auxJueves.get(i - 1).getHora());
+                    } else {
+                        aux.setHoraFin(auxJueves.get(i).getHora());
+                    }
                     jueves.add(aux);
                 } while (i < length);
             }
@@ -269,7 +280,11 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     while (aux.getLugar().equals(auxViernes.get(i).getLugar()) && i < length) {
                         i++;
                     }
-                    aux.setHoraFin(auxViernes.get(i - 1).getHora());
+                    if (i < length) {
+                        aux.setHoraFin(auxViernes.get(i - 1).getHora());
+                    } else {
+                        aux.setHoraFin(auxViernes.get(i).getHora());
+                    }
                     viernes.add(aux);
                 } while (i < length);
             }
