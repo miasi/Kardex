@@ -16,4 +16,13 @@
     <string name="title_activity_foro">Foro</string>
     <string name="title_activity_mapa_tec">MapaTec</string>
     <string name="title_activity_intern__unidades">"Detalle de unidades "</string>
+    <string name="title_activity_horario_real__maestro">Horario docente</string>
+    <string name="horasycursos">Horarios y cursos</string>
+    <string name="calif">Calificaciones</string>
+    <string name="horario">Horario</string>
+    <string name="horario_maestros">Horario maestros</string>
+    <string name="ubicaciones">Ubicaciones</string>
+    <string name="mapas">Mapa</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="salida">Salir</string>
 </resources> <!-- %1$d -->

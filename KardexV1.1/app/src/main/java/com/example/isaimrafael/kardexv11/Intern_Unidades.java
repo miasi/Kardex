@@ -71,4 +71,10 @@ public class Intern_Unidades extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Intern_Unidades.this.finish();
+    }
+
 }

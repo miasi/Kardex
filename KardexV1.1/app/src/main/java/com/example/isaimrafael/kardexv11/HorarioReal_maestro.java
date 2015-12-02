@@ -1,17 +1,23 @@
 package com.example.isaimrafael.kardexv11;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,11 +27,12 @@ import com.example.isaimrafael.kardexv11.web_service.ws_cursando;
 import com.example.isaimrafael.kardexv11.web_service.ws_curso;
 import com.example.isaimrafael.kardexv11.web_service.ws_horario;
 import com.example.isaimrafael.kardexv11.web_service.ws_horario_aux;
+import com.example.isaimrafael.kardexv11.web_service.ws_horario_maestro;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Horario extends AppCompatActivity {
+public class HorarioReal_maestro extends AppCompatActivity {
 
     private static ListView lista;
     private static TareaArrayAdapter<Tarea> adaptador;
@@ -36,8 +43,9 @@ public class Horario extends AppCompatActivity {
     private static List<ws_horario_aux> miercoles;
     private static List<ws_horario_aux> jueves;
     private static List<ws_horario_aux> viernes;
-    String control, password;
-    private ws_cursando cursando;
+    String nombre, password;
+    int pocision;
+    private ws_horario_maestro maestro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +60,8 @@ public class Horario extends AppCompatActivity {
         jueves = new ArrayList<>();
         viernes = new ArrayList<>();
         Bundle b = getIntent().getExtras();
-        control = b.getString("control");
-        password = b.getString("passWS");
+        password = b.getString("Password");
+        nombre = b.getString("Nombre");
         new descargar().execute("");
     }
 
@@ -125,7 +133,7 @@ public class Horario extends AppCompatActivity {
                     textView.setText("Clases del dia Martes");
                     pals = new String[martes.size()];
                     horas = new String[martes.size()];
-                    for (int i=0; i < martes.size();i++){
+                    for (int i = 0; i < martes.size(); i++) {
                         pals[i] = martes.get(i).getMateria();
                         horas[i] = martes.get(i).getHorario();
                     }
@@ -134,16 +142,17 @@ public class Horario extends AppCompatActivity {
                     textView.setText("Clases del dia Miercoles");
                     pals = new String[miercoles.size()];
                     horas = new String[miercoles.size()];
-                    for (int i=0; i < miercoles.size();i++){
+                    for (int i = 0; i < miercoles.size(); i++) {
                         pals[i] = miercoles.get(i).getMateria();
                         horas[i] = miercoles.get(i).getHorario();
                     }
                     break;
                 case 4:
+
                     textView.setText("Clases del dia Jueves");
                     pals = new String[jueves.size()];
                     horas = new String[jueves.size()];
-                    for (int i=0; i < jueves.size(); i++){
+                    for (int i = 0; i < jueves.size(); i++) {
                         pals[i] = jueves.get(i).getMateria();
                         horas[i] = jueves.get(i).getHorario();
                     }
@@ -152,7 +161,7 @@ public class Horario extends AppCompatActivity {
                     textView.setText("Clases del dia Viernes");
                     pals = new String[viernes.size()];
                     horas = new String[viernes.size()];
-                    for (int i=0; i < viernes.size(); i++){
+                    for (int i = 0; i < viernes.size(); i++) {
                         pals[i] = viernes.get(i).getMateria();
                         horas[i] = viernes.get(i).getHorario();
                     }
@@ -165,7 +174,7 @@ public class Horario extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(String... params) {
-            cursando = new ws_cursando(control, password);
+            maestro = new ws_horario_maestro(nombre, password);
             return 1;
         }
 
@@ -298,7 +307,7 @@ public class Horario extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
     }
 }
