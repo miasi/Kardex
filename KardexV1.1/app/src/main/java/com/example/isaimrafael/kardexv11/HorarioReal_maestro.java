@@ -1,50 +1,40 @@
 package com.example.isaimrafael.kardexv11;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.isaimrafael.kardexv11.rellena_materias_horario.Tarea;
 import com.example.isaimrafael.kardexv11.rellena_materias_horario.TareaArrayAdapter;
-import com.example.isaimrafael.kardexv11.web_service.ws_cursando;
-import com.example.isaimrafael.kardexv11.web_service.ws_curso;
-import com.example.isaimrafael.kardexv11.web_service.ws_horario;
-import com.example.isaimrafael.kardexv11.web_service.ws_horario_aux;
 import com.example.isaimrafael.kardexv11.web_service.ws_horario_maestro;
+import com.example.isaimrafael.kardexv11.web_service.ws_horario_maestro_personal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HorarioReal_maestro extends AppCompatActivity {
-/*
+
     private static ListView lista;
     private static TareaArrayAdapter<Tarea> adaptador;
     private static String[] pals;
     private static String[] horas;
-    private static List<ws_horario_aux> lunes;
-    private static List<ws_horario_aux> martes;
-    private static List<ws_horario_aux> miercoles;
-    private static List<ws_horario_aux> jueves;
-    private static List<ws_horario_aux> viernes;
-    String nombre, password;
-    int pocision;
+    private static List<ws_horario_maestro_personal> lunes;
+    private static List<ws_horario_maestro_personal> martes;
+    private static List<ws_horario_maestro_personal> miercoles;
+    private static List<ws_horario_maestro_personal> jueves;
+    private static List<ws_horario_maestro_personal> viernes;
+    private String nombre, password;
     private ws_horario_maestro maestro;
 
     @Override
@@ -65,26 +55,23 @@ public class HorarioReal_maestro extends AppCompatActivity {
         new descargar().execute("");
     }
 
-    private String getMin(List<ws_horario> horarios) {
-        int menor = Integer.parseInt(horarios.get(0).getHoraInicio());
-        for (int i = 0; i < horarios.size(); i++) {
-            int x = Integer.parseInt(horarios.get(i).getHoraInicio());
-            if (x < menor) {
-                menor = x;
+    private List<ws_horario_maestro_personal> sortList(List<ws_horario_maestro_personal> list) {
+        int length = list.size() - 1;
+        for (int i = 1; i <= length; i++) {
+            for (int j = length; j >= i; j--) {
+                if (list.get(j - 1).getHoraInt() > list.get(j).getHoraInt()) {
+                    ws_horario_maestro_personal aux = list.get(j - 1);
+                    list.set(j - 1, list.get(j));
+                    list.set(j, aux);
+                }
             }
         }
-        return Integer.toString(menor);
+        return list;
     }
 
-    private String getMax(List<ws_horario> horarios) {
-        int mayor = Integer.parseInt(horarios.get(0).getHoraFin());
-        for (int i = 0; i < horarios.size(); i++) {
-            int x = Integer.parseInt(horarios.get(i).getHoraFin());
-            if (x > mayor) {
-                mayor = x;
-            }
-        }
-        return Integer.toString(mayor);
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     public static class PlaceholderFragment extends Fragment {
@@ -124,7 +111,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     pals = new String[lunes.size()];
                     horas = new String[lunes.size()];
                     for (int i = 0; i < lunes.size(); i++) {
-                        pals[i] = lunes.get(i).getMateria();
+                        pals[i] = lunes.get(i).getLugar();
                         horas[i] = lunes.get(i).getHorario();
                     }
                     break;
@@ -134,7 +121,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     pals = new String[martes.size()];
                     horas = new String[martes.size()];
                     for (int i = 0; i < martes.size(); i++) {
-                        pals[i] = martes.get(i).getMateria();
+                        pals[i] = martes.get(i).getLugar();
                         horas[i] = martes.get(i).getHorario();
                     }
                     break;
@@ -143,7 +130,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     pals = new String[miercoles.size()];
                     horas = new String[miercoles.size()];
                     for (int i = 0; i < miercoles.size(); i++) {
-                        pals[i] = miercoles.get(i).getMateria();
+                        pals[i] = miercoles.get(i).getLugar();
                         horas[i] = miercoles.get(i).getHorario();
                     }
                     break;
@@ -153,7 +140,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     pals = new String[jueves.size()];
                     horas = new String[jueves.size()];
                     for (int i = 0; i < jueves.size(); i++) {
-                        pals[i] = jueves.get(i).getMateria();
+                        pals[i] = jueves.get(i).getLugar();
                         horas[i] = jueves.get(i).getHorario();
                     }
                     break;
@@ -162,7 +149,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     pals = new String[viernes.size()];
                     horas = new String[viernes.size()];
                     for (int i = 0; i < viernes.size(); i++) {
-                        pals[i] = viernes.get(i).getMateria();
+                        pals[i] = viernes.get(i).getLugar();
                         horas[i] = viernes.get(i).getHorario();
                     }
                     break;
@@ -180,83 +167,111 @@ public class HorarioReal_maestro extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
-            for (int i = 0; i < maestro.getCursos().size(); i++) {
-                ws_curso curso = maestro.getCursos().get(i);
-                // Aux Lists
-                List<ws_horario> auxLunes = new ArrayList<ws_horario>();
-                List<ws_horario> auxMartes = new ArrayList<ws_horario>();
-                List<ws_horario> auxMiercoles = new ArrayList<ws_horario>();
-                List<ws_horario> auxJueves = new ArrayList<ws_horario>();
-                List<ws_horario> auxViernes = new ArrayList<ws_horario>();
-                for (int j = 0; j < curso.getHorarios().size(); j++) {
-                    ws_horario horario = curso.getHorarios().get(j);
-                    if (horario.getDia().toLowerCase().equals("lunes")) {
-                        auxLunes.add(horario);
-                    } else if (horario.getDia().toLowerCase().equals("martes")) {
-                        auxMartes.add(horario);
-                    } else if (horario.getDia().toLowerCase().equals("miercoles")) {
-                        auxMiercoles.add(horario);
-                    } else if (horario.getDia().toLowerCase().equals("jueves")) {
-                        auxJueves.add(horario);
-                    } else if (horario.getDia().toLowerCase().equals("viernes")) {
-                        auxViernes.add(horario);
+            // Aux Lists
+            List<ws_horario_maestro_personal> auxLunes = new ArrayList<>();
+            List<ws_horario_maestro_personal> auxMartes = new ArrayList<>();
+            List<ws_horario_maestro_personal> auxMiercoles = new ArrayList<>();
+            List<ws_horario_maestro_personal> auxJueves = new ArrayList<>();
+            List<ws_horario_maestro_personal> auxViernes = new ArrayList<>();
+            for (int j = 0; j < maestro.getHorariosMaestros().size(); j++) {
+                ws_horario_maestro_personal horario = maestro.getHorariosMaestros().get(j);
+                if (horario.getDia().toLowerCase().equals("lunes")) {
+                    auxLunes.add(horario);
+                } else if (horario.getDia().toLowerCase().equals("martes")) {
+                    auxMartes.add(horario);
+                } else if (horario.getDia().toLowerCase().equals("miercoles")) {
+                    auxMiercoles.add(horario);
+                } else if (horario.getDia().toLowerCase().equals("jueves")) {
+                    auxJueves.add(horario);
+                } else if (horario.getDia().toLowerCase().equals("viernes")) {
+                    auxViernes.add(horario);
+                }
+            }
+            // Sort Lists
+            auxLunes = sortList(auxLunes);
+            auxMartes = sortList(auxMartes);
+            auxMiercoles = sortList(auxMiercoles);
+            auxJueves = sortList(auxJueves);
+            auxViernes = sortList(auxViernes);
+            // Lunes
+            if (auxLunes.size() > 0) {
+                int length = auxLunes.size() - 1;
+                int i = 0;
+                do {
+                    ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
+                    aux.setDia(auxLunes.get(i).getDia());
+                    aux.setHora(auxLunes.get(i).getHora());
+                    aux.setLugar(auxLunes.get(i).getLugar());
+                    while (aux.getLugar().equals(auxLunes.get(i).getLugar()) && i < length) {
+                        i++;
                     }
-                }
-
-                // Lunes
-                if (auxLunes.size() > 0) {
-                    ws_horario_aux aux = new ws_horario_aux();
-                    aux.setMateria(curso.getMateria());
-                    aux.setDia(auxLunes.get(0).getDia());
-                    aux.setHoraInicio(getMin(auxLunes));
-                    aux.setHoraFin(getMax(auxLunes));
-                    aux.setAula(auxLunes.get(0).getAula());
+                    aux.setHoraFin(auxLunes.get(i - 1).getHora());
                     lunes.add(aux);
-                }
-
-                // Martes
-                if (auxMartes.size() > 0) {
-                    ws_horario_aux aux = new ws_horario_aux();
-                    aux.setMateria(curso.getMateria());
-                    aux.setDia(auxMartes.get(0).getDia());
-                    aux.setHoraInicio(getMin(auxMartes));
-                    aux.setHoraFin(getMax(auxMartes));
-                    aux.setAula(auxMartes.get(0).getAula());
+                } while (i < length);
+            }
+            // Martes
+            if (auxMartes.size() > 0) {
+                int length = auxMartes.size() - 1;
+                int i = 0;
+                do {
+                    ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
+                    aux.setDia(auxMartes.get(i).getDia());
+                    aux.setHora(auxMartes.get(i).getHora());
+                    aux.setLugar(auxMartes.get(i).getLugar());
+                    while (aux.getLugar().equals(auxMartes.get(i).getLugar()) && i < length) {
+                        i++;
+                    }
+                    aux.setHoraFin(auxMartes.get(i - 1).getHora());
                     martes.add(aux);
-                }
-
-                // Miercoles
-                if (auxMiercoles.size() > 0) {
-                    ws_horario_aux aux = new ws_horario_aux();
-                    aux.setMateria(curso.getMateria());
-                    aux.setDia(auxMiercoles.get(0).getDia());
-                    aux.setHoraInicio(getMin(auxMiercoles));
-                    aux.setHoraFin(getMax(auxMiercoles));
-                    aux.setAula(auxMiercoles.get(0).getAula());
+                } while (i < length);
+            }
+            // Miercoles
+            if (auxMiercoles.size() > 0) {
+                int length = auxMiercoles.size() - 1;
+                int i = 0;
+                do {
+                    ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
+                    aux.setDia(auxMiercoles.get(i).getDia());
+                    aux.setHora(auxMiercoles.get(i).getHora());
+                    aux.setLugar(auxMiercoles.get(i).getLugar());
+                    while (aux.getLugar().equals(auxMiercoles.get(i).getLugar()) && i < length) {
+                        i++;
+                    }
+                    aux.setHoraFin(auxMiercoles.get(i - 1).getHora());
                     miercoles.add(aux);
-                }
-
-                // Jueves
-                if (auxJueves.size() > 0) {
-                    ws_horario_aux aux = new ws_horario_aux();
-                    aux.setMateria(curso.getMateria());
-                    aux.setDia(auxJueves.get(0).getDia());
-                    aux.setHoraInicio(getMin(auxJueves));
-                    aux.setHoraFin(getMax(auxJueves));
-                    aux.setAula(auxJueves.get(0).getAula());
+                } while (i < length);
+            }
+            // Jueves
+            if (auxJueves.size() > 0) {
+                int length = auxJueves.size() - 1;
+                int i = 0;
+                do {
+                    ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
+                    aux.setDia(auxJueves.get(i).getDia());
+                    aux.setHora(auxJueves.get(i).getHora());
+                    aux.setLugar(auxJueves.get(i).getLugar());
+                    while (aux.getLugar().equals(auxJueves.get(i).getLugar()) && i < length) {
+                        i++;
+                    }
+                    aux.setHoraFin(auxJueves.get(i - 1).getHora());
                     jueves.add(aux);
-                }
-
-                // Viernes
-                if (auxViernes.size() > 0) {
-                    ws_horario_aux aux = new ws_horario_aux();
-                    aux.setMateria(curso.getMateria());
-                    aux.setDia(auxViernes.get(0).getDia());
-                    aux.setHoraInicio(getMin(auxViernes));
-                    aux.setHoraFin(getMax(auxViernes));
-                    aux.setAula(auxViernes.get(0).getAula());
+                } while (i < length);
+            }
+            // Viernes
+            if (auxViernes.size() > 0) {
+                int length = auxViernes.size() - 1;
+                int i = 0;
+                do {
+                    ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
+                    aux.setDia(auxViernes.get(i).getDia());
+                    aux.setHora(auxViernes.get(i).getHora());
+                    aux.setLugar(auxViernes.get(i).getLugar());
+                    while (aux.getLugar().equals(auxViernes.get(i).getLugar()) && i < length) {
+                        i++;
+                    }
+                    aux.setHoraFin(auxViernes.get(i - 1).getHora());
                     viernes.add(aux);
-                }
+                } while (i < length);
             }
             try {
                 ViewPager mViewPager;
@@ -305,10 +320,4 @@ public class HorarioReal_maestro extends AppCompatActivity {
             return null;
         }
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-    */
 }

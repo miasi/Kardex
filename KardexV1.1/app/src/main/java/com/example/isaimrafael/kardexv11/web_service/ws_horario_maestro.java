@@ -24,7 +24,7 @@ public class ws_horario_maestro {
     public final String WSDL_TARGET_NAMESPACE = "http://siia.itlp.edu.mx/";
     public final String SOAP_ADRESS = "http://siia.itlp.edu.mx/WebServiceITLP.asmx?WSDL";
 
-    private List<ws_horario_maestro_personal> horariosMaestros = new ArrayList<ws_horario_maestro_personal>();
+    private List<ws_horario_maestro_personal> horariosMaestros = new ArrayList<>();
 
     public ws_horario_maestro(String control, String passws) {
         try {
@@ -38,6 +38,8 @@ public class ws_horario_maestro {
                 horarioMaestro.setDia(wsHoraPersonal.getElementsByTagName("dia").item(0).getTextContent());
                 horarioMaestro.setHora(wsHoraPersonal.getElementsByTagName("hora").item(0).getTextContent());
                 horarioMaestro.setLugar(wsHoraPersonal.getElementsByTagName("lugar").item(0).getTextContent());
+
+                horariosMaestros.add(horarioMaestro);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,10 +48,6 @@ public class ws_horario_maestro {
 
     public List<ws_horario_maestro_personal> getHorariosMaestros() {
         return horariosMaestros;
-    }
-
-    public void setHorariosMaestros(List<ws_horario_maestro_personal> horariosMaestros) {
-        this.horariosMaestros = horariosMaestros;
     }
 
     public String getXML(String control, String passws) {

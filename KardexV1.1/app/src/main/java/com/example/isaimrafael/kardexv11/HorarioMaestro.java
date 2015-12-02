@@ -27,6 +27,19 @@ public class HorarioMaestro extends AppCompatActivity {
     List<String> nombre = new ArrayList<>();
     List<String> dias = new ArrayList<>();
     private ListView lista;
+    AdapterView.OnItemClickListener golistaHora = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Bundle b = new Bundle();
+            Tarea nombres = (Tarea) lista.getItemAtPosition(position);
+            String nombre = nombres.getNombre();
+            b.putString("Password", password);
+            b.putString("Nombre", nombre);
+            Intent i = new Intent(HorarioMaestro.this, HorarioReal_maestro.class);
+            i.putExtras(b);
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +51,10 @@ public class HorarioMaestro extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         control = b.getString("control");
         password = b.getString("passWS");
-        lista = (ListView)findViewById(R.id.ListaMaestros);
+        lista = (ListView) findViewById(R.id.ListaMaestros);
         lista.setOnItemClickListener(golistaHora);
         new descargar().execute("");
     }
-
-    AdapterView.OnItemClickListener golistaHora = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Bundle b = new Bundle();
-            String nombre = (String)lista.getItemAtPosition(position);
-            b.putString("Password", password);
-            b.putString("Nombre", nombre);
-            Intent i = new Intent(HorarioMaestro.this, HorarioReal_maestro.class);
-            i.putExtras(b);
-            startActivity(i);
-        }
-    };
 
     private class descargar extends AsyncTask<String, Void, Object> {
 
@@ -72,25 +72,10 @@ public class HorarioMaestro extends AppCompatActivity {
                 dias.add(" ");
             }
             List<Tarea> TAREAS = new ArrayList<Tarea>();
-            for (int i=0; i < nombreMaestro.size(); i++)
+            for (int i = 0; i < nombreMaestro.size(); i++)
                 TAREAS.add(new Tarea(nombreMaestro.get(i), dias.get(i)));
             adaptador = new TareaArrayAdapter<Tarea>(HorarioMaestro.this, TAREAS);
             lista.setAdapter(adaptador);
-            new descargarWSMaestro().execute("");
-            super.onPostExecute(result);
-        }
-    }
-
-    private class descargarWSMaestro extends AsyncTask<String, Void, Object> {
-
-        @Override
-        protected Object doInBackground(String... params) {
-            maestros = new ws_horario_maestro(nombreMaestro.get(0), password);
-            return 1;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
             super.onPostExecute(result);
         }
     }

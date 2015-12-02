@@ -35,4 +35,8 @@ public class ws_horario_aux {
     public String getHorario() {
         return String.format("%s-%s %s", horaInicio, horaFin, aula);
     }
+
+    public int getHoraInicioInt() {
+        return Integer.parseInt(horaInicio);
+    }
 }

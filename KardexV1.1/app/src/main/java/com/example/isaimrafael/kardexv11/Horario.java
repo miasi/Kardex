@@ -79,6 +79,25 @@ public class Horario extends AppCompatActivity {
         return Integer.toString(mayor);
     }
 
+    public List<ws_horario_aux> sortList(List<ws_horario_aux> list) {
+        int length = list.size() - 1;
+        for (int i = 1; i <= length; i++) {
+            for (int j = length; j >= i; j--) {
+                if (list.get(j - 1).getHoraInicioInt() > list.get(j).getHoraInicioInt()) {
+                    ws_horario_aux aux = list.get(j - 1);
+                    list.set(j - 1, list.get(j));
+                    list.set(j, aux);
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
     public static class PlaceholderFragment extends Fragment {
         private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -125,7 +144,7 @@ public class Horario extends AppCompatActivity {
                     textView.setText("Clases del dia Martes");
                     pals = new String[martes.size()];
                     horas = new String[martes.size()];
-                    for (int i=0; i < martes.size();i++){
+                    for (int i = 0; i < martes.size(); i++) {
                         pals[i] = martes.get(i).getMateria();
                         horas[i] = martes.get(i).getHorario();
                     }
@@ -134,7 +153,7 @@ public class Horario extends AppCompatActivity {
                     textView.setText("Clases del dia Miercoles");
                     pals = new String[miercoles.size()];
                     horas = new String[miercoles.size()];
-                    for (int i=0; i < miercoles.size();i++){
+                    for (int i = 0; i < miercoles.size(); i++) {
                         pals[i] = miercoles.get(i).getMateria();
                         horas[i] = miercoles.get(i).getHorario();
                     }
@@ -143,7 +162,7 @@ public class Horario extends AppCompatActivity {
                     textView.setText("Clases del dia Jueves");
                     pals = new String[jueves.size()];
                     horas = new String[jueves.size()];
-                    for (int i=0; i < jueves.size(); i++){
+                    for (int i = 0; i < jueves.size(); i++) {
                         pals[i] = jueves.get(i).getMateria();
                         horas[i] = jueves.get(i).getHorario();
                     }
@@ -152,7 +171,7 @@ public class Horario extends AppCompatActivity {
                     textView.setText("Clases del dia Viernes");
                     pals = new String[viernes.size()];
                     horas = new String[viernes.size()];
-                    for (int i=0; i < viernes.size(); i++){
+                    for (int i = 0; i < viernes.size(); i++) {
                         pals[i] = viernes.get(i).getMateria();
                         horas[i] = viernes.get(i).getHorario();
                     }
@@ -193,7 +212,6 @@ public class Horario extends AppCompatActivity {
                         auxViernes.add(horario);
                     }
                 }
-
                 // Lunes
                 if (auxLunes.size() > 0) {
                     ws_horario_aux aux = new ws_horario_aux();
@@ -204,7 +222,6 @@ public class Horario extends AppCompatActivity {
                     aux.setAula(auxLunes.get(0).getAula());
                     lunes.add(aux);
                 }
-
                 // Martes
                 if (auxMartes.size() > 0) {
                     ws_horario_aux aux = new ws_horario_aux();
@@ -215,7 +232,6 @@ public class Horario extends AppCompatActivity {
                     aux.setAula(auxMartes.get(0).getAula());
                     martes.add(aux);
                 }
-
                 // Miercoles
                 if (auxMiercoles.size() > 0) {
                     ws_horario_aux aux = new ws_horario_aux();
@@ -226,7 +242,6 @@ public class Horario extends AppCompatActivity {
                     aux.setAula(auxMiercoles.get(0).getAula());
                     miercoles.add(aux);
                 }
-
                 // Jueves
                 if (auxJueves.size() > 0) {
                     ws_horario_aux aux = new ws_horario_aux();
@@ -237,7 +252,6 @@ public class Horario extends AppCompatActivity {
                     aux.setAula(auxJueves.get(0).getAula());
                     jueves.add(aux);
                 }
-
                 // Viernes
                 if (auxViernes.size() > 0) {
                     ws_horario_aux aux = new ws_horario_aux();
@@ -249,6 +263,11 @@ public class Horario extends AppCompatActivity {
                     viernes.add(aux);
                 }
             }
+            lunes = sortList(lunes);
+            martes = sortList(martes);
+            miercoles = sortList(miercoles);
+            jueves = sortList(jueves);
+            viernes = sortList(viernes);
             try {
                 ViewPager mViewPager;
                 SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -295,10 +314,5 @@ public class Horario extends AppCompatActivity {
             }
             return null;
         }
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
     }
 }
