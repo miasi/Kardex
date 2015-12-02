@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KardexV1.1</string>
     <string name="title_activity_menues">Menues</string>
@@ -15,5 +16,4 @@
     <string name="title_activity_unidades">Unidades</string>
     <string name="title_activity_foro">Foro</string>
     <string name="title_activity_mapa_tec">MapaTec</string>
-    <string name="title_activity_intern__unidades">"Detalle de unidades "</string>
-</resources> <!-- %1$d -->
+</resources>

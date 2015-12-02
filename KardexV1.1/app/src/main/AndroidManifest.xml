@@ -5,13 +5,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".Principal"
             android:windowSoftInputMode="adjustResize|stateUnchanged" >
@@ -86,7 +85,8 @@
             android:name=".Foro"
             android:label="@string/title_activity_foro"
             android:parentActivityName=".Cursando"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateUnchanged" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.isaimrafael.kardexv11.Cursando" />
@@ -99,6 +99,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.isaimrafael.kardexv11.Menues" />
+        </activity>
+        <activity
+            android:name=".Intern_Unidades"
+            android:label="@string/title_activity_intern__unidades"
+            android:parentActivityName=".Unidades"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.isaimrafael.kardexv11.Unidades" />
         </activity>
     </application>
 
