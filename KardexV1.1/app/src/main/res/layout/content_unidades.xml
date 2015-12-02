@@ -14,7 +14,10 @@
         android:text="prueb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large"
+         />
 
     <ListView
         android:id="@+id/ListaUnidades"

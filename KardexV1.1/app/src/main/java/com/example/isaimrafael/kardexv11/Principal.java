@@ -20,18 +20,9 @@ public class Principal extends AppCompatActivity {
 
     String obControl, obContra;
     private EditText control, contra;
-    View.OnClickListener AccederOnClickLister = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            obControl = control.getText().toString();
-            obContra = contra.getText().toString().toUpperCase();
-            online();
-            new Descargar().execute("");
-        }
-    };
     private Button acceder, ubicanos;
     private String res;
-    private String passWS = "a8%x*5$d4#1";
+    public static String passWS = "a8%x*5$d4#1";
     private int regresar = 0;
 
     public static String MD5(String md5) {
@@ -47,6 +38,16 @@ public class Principal extends AppCompatActivity {
         }
         return null;
     }
+
+    View.OnClickListener AccederOnClickLister = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            obControl = control.getText().toString();
+            obContra = contra.getText().toString().toUpperCase();
+            online();
+            new Descargar().execute("");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +95,11 @@ public class Principal extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*control.setText("");
+        control.setText("");
         contra.setText("");
         control.setHint("Numero de control");
         contra.setHint("Contraseña");
-        control.requestFocus();*/
+        control.requestFocus();
     }
 
     @Override

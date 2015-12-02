@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HorarioReal_maestro extends AppCompatActivity {
-
+/*
     private static ListView lista;
     private static TareaArrayAdapter<Tarea> adaptador;
     private static String[] pals;
@@ -180,8 +180,8 @@ public class HorarioReal_maestro extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
-            for (int i = 0; i < cursando.getCursos().size(); i++) {
-                ws_curso curso = cursando.getCursos().get(i);
+            for (int i = 0; i < maestro.getCursos().size(); i++) {
+                ws_curso curso = maestro.getCursos().get(i);
                 // Aux Lists
                 List<ws_horario> auxLunes = new ArrayList<ws_horario>();
                 List<ws_horario> auxMartes = new ArrayList<ws_horario>();
@@ -310,4 +310,5 @@ public class HorarioReal_maestro extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
     }
+    */
 }

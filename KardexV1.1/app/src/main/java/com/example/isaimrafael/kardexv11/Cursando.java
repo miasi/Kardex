@@ -67,7 +67,6 @@ public class Cursando extends AppCompatActivity {
                         pass = cs.getString(1);
                     }while (cs.moveToNext());
                 }
-                db.execSQL("DROP TABLE IF EXISTS temporalDos;");
                 new descargar().execute("");
             }
         }

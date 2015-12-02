@@ -20,6 +20,7 @@ import com.example.isaimrafael.kardexv11.web_service.ws_foro_mensaje;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Foro extends AppCompatActivity {
@@ -31,6 +32,7 @@ public class Foro extends AppCompatActivity {
     ScrollView scroll;
     TextView mensaje;
     LinearLayout contenido;
+    String plan, año, periodo, materia, grupo, alumno, cadena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,41 +41,80 @@ public class Foro extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        new descargar().execute("");
+        Bundle b = getIntent().getExtras();
+        plan = b.getString("Plan");
+        año = b.getString("Año");
+        periodo = b.getString("Periodo");
+        materia = b.getString("Materia");
+        grupo = b.getString("Grupo");
+        alumno = b.getString("Alumno");
         enviar = (ImageButton)findViewById(R.id.BtnEnviar);
         texto = (EditText)findViewById(R.id.EnviarMensaje);
         contenido = (LinearLayout)findViewById(R.id.containter);
-        enviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    TextView tv = new TextView(Foro.this);
-                    tv.setText(texto.getText());
-                    RelativeLayout rl = new RelativeLayout(Foro.this);
-                    RelativeLayout.LayoutParams parametros = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
-                    tv.setLayoutParams(parametros);
-                    rl.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
-                    rl.addView(tv);
-                    contenido.addView(rl);
-                    texto.setText("");
-                    texto.setHint("Escribe aquí...");
-                    texto.setFocusable(true);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+        enviar.setOnClickListener(enviodeChat);
+        new descargar().execute("");
+    }
+
+    View.OnClickListener enviodeChat = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+                TextView tv = new TextView(Foro.this);
+                tv.setText(texto.getText());
+                cadena = texto.getText().toString();
+                RelativeLayout rl = new RelativeLayout(Foro.this);
+                RelativeLayout.LayoutParams parametros = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                tv.setLayoutParams(parametros);
+                rl.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                rl.addView(tv);
+                contenido.addView(rl);
+                texto.setText("");
+                texto.setHint("Escribe aquí...");
+                texto.setFocusable(true);
+                new descargarEnvio().execute("");
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        });
+        }
+    };
+
+    private class descargarEnvio extends AsyncTask<String, Void, Object> {
+
+        @Override
+        protected Object doInBackground(String... params) {
+            String s = foro.crearMensaje(plan, año, periodo, materia, grupo, alumno, cadena , Principal.passWS);
+            String check = s;
+            if (check.equals("")){}
+            return 1;
+        }
     }
 
     private class descargar extends AsyncTask<String, Void, Object> {
 
         @Override
         protected Object doInBackground(String... params) {
-            mensajes = foro.consultarMensaje("ISIC-2010-224", "2015", "Agosto-Diciembre", "AUDITORIA INFORMATICA", "K", "a8%x*5$d4#1");
-            String s = foro.crearMensaje("ISIC-2010-224", "2015", "Agosto-Diciembre", "AUDITORIA INFORMATICA", "K", "11310222", "test", "a8%x*5$d4#1");
+            mensajes = foro.consultarMensaje(plan, año, periodo, materia, grupo, Principal.passWS);
             return 1;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            String results=null;
+            for (int i =0; i < mensajes.size(); i++){
+                results = mensajes.get(i).getNombre()+": "+mensajes.get(i).getMensaje();
+                TextView tv = new TextView(Foro.this);
+                tv.setText(results);
+                RelativeLayout rl = new RelativeLayout(Foro.this);
+                RelativeLayout.LayoutParams parametros = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                tv.setLayoutParams(parametros);
+                rl.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                rl.addView(tv);
+                contenido.addView(rl);
+            }
         }
     }
 }

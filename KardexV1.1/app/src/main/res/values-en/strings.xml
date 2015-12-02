@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KardexV1.1</string>
-    <string name="title_activity_menues">Menues</string>
-
+    <string name="title_activity_menues">Welcome</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <!--TITULO DE ACTIVITIES -->
     <string name="title_activity_mapa">Map</string>
-    <string name="title_activity_cursando">Cursando</string>
-    <string name="title_activity_horario">Horario</string>
-    <string name="title_activity_horario_maestro">HorarioMaestro</string>
+    <string name="title_activity_cursando">Subjects</string>
+    <string name="title_activity_horario">Schedule</string>
+    <string name="title_activity_horario_maestro">Teachers</string>
+    <string name="title_activity_unidades">Unities</string>
+    <string name="title_activity_foro">Chat</string>
+    <string name="title_activity_mapa_tec">School Map</string>
+    <string name="title_activity_intern__unidades">"Detail of unities"</string>
+    <string name="title_activity_horario_real__maestro">Teacher Schedule</string>
+
     <string name="section_title">hello</string>
-    <string name="section_format">Horario del dia: </string>
-    <string name="title_activity_unidades">Unidades</string>
-    <string name="title_activity_foro">Foro</string>
-    <string name="title_activity_mapa_tec">MapaTec</string>
+    <string name="section_format">Schedule of the day: </string>
+    <!-- MENU OPCIONES -->
+    <string name="horasycursos">Schedules and classes</string>
+    <string name="calif">Grades</string>
+    <string name="horario">Schedule</string>
+    <string name="horario_maestros">Teacher Schedule</string>
+    <string name="ubicaciones">Locations</string>
+    <string name="mapas">Map</string>
+    <string name="cerrar_sesion">End Sesion</string>
+    <string name="salida">Salir</string>
+    <!-- Principal -->
+    <string name="accesokardex">Kardex Login</string>
+    <string name="numerocontrol">Control number</string>
+    <string name="contrasena">Password</string>
+    <string name="acceder">Login</string>
+
+    <string name="tuscursos">Your subjects</string>
 </resources>

@@ -34,9 +34,9 @@ public class Unidades extends AppCompatActivity {
     TareaArrayAdapter<Tarea> adaptador;
     ws_cursando cursando;
     String control, password;
-    List<String> tituloUnidad = new ArrayList<>();
-    List<String> detalleUnidad = new ArrayList<>();
-    List<Integer> calificacion = new ArrayList<>();
+    List<String> tituloUnidad;
+    List<String> detalleUnidad;
+    List<String> EnviarForo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,9 @@ public class Unidades extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        EnviarForo = new ArrayList<>();
+        detalleUnidad = new ArrayList<>();
+        tituloUnidad = new ArrayList<>();
         BaseDatos = new LocalDB(this, "Temporales", null,1);
         db = BaseDatos.getWritableDatabase();
         nombre = (TextView) findViewById(R.id.recibeNombre);
@@ -65,7 +68,6 @@ public class Unidades extends AppCompatActivity {
                         password = cs.getString(1);
                     } while (cs.moveToNext());
                 }
-                db.execSQL("DROP TABLE IF EXISTS temporal;");
             }
         }
         unities = (ListView) findViewById(R.id.ListaUnidades);
@@ -102,6 +104,20 @@ public class Unidades extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.chat) {
             Intent intent = new Intent(Unidades.this, Foro.class);
+            String plan = EnviarForo.get(0);
+            String año = EnviarForo.get(1);
+            String periodo = EnviarForo.get(2);
+            String materia = EnviarForo.get(3);
+            String grupo = EnviarForo.get(4);
+            String alumno = EnviarForo.get(5);
+            Bundle b = new Bundle();
+            b.putString("Plan", plan);
+            b.putString("Año", año);
+            b.putString("Periodo", periodo);
+            b.putString("Materia", materia);
+            b.putString("Grupo", grupo);
+            b.putString("Alumno", alumno);
+            intent.putExtras(b);
             startActivity(intent);
             return true;
         }
@@ -119,6 +135,13 @@ public class Unidades extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
+            EnviarForo.add(cursando.getCursos().get(val).getGrupos().get(0).getPlan());
+            EnviarForo.add(String.valueOf(cursando.getCursos().get(val).getAnio()));
+            EnviarForo.add(cursando.getCursos().get(val).getPeriodo());
+            EnviarForo.add(cursando.getCursos().get(val).getMateria());
+            EnviarForo.add(cursando.getCursos().get(val).getGrupo());
+            EnviarForo.add(cursando.getCursos().get(val).getAlumno());
+
             int vals = cursando.getCursos().get(val).getCalificaciones().size();
             for (int i = 0; i < vals; i++) {
                 tituloUnidad.add(cursando.getCursos().get(val).getCalificaciones().get(i).getUnidad());
