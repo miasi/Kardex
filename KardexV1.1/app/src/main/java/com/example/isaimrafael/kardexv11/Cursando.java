@@ -1,5 +1,7 @@
 package com.example.isaimrafael.kardexv11;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,13 +30,13 @@ public class Cursando extends AppCompatActivity {
 
     LocalDB BaseDatos;
     SQLiteDatabase db;
-    private String res;
     private String contr, pass;
     private ListView lista;
     TareaArrayAdapter<Tarea> adaptador;
     ws_cursando cursando;
     List<String> nombre = new ArrayList<>();
-    List<String> dias = new ArrayList<>();
+    private Context context;
+    private ProgressDialog pd = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class Cursando extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        context = this;
         lista = (ListView)findViewById(R.id.listaCursando);
         lista.setOnItemClickListener(listaCursos);
         SalvaLogin();
@@ -54,9 +57,9 @@ public class Cursando extends AppCompatActivity {
         if (b!= null) {
             contr = b.getString("control");
             pass = b.getString("passWS");
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporalDos (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporalDos (control, passw) VALUES ('"+contr+"','"+pass+"');");
             new descargar().execute("");
+            pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
+            db.execSQL("DROP TABLE temporalDos;");
         }else{
             String query = "SELECT * FROM temporalDos;";
             Cursor cs = db.rawQuery(query,null);
@@ -68,6 +71,7 @@ public class Cursando extends AppCompatActivity {
                     }while (cs.moveToNext());
                 }
                 new descargar().execute("");
+                pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
             }
         }
     }
@@ -83,40 +87,20 @@ public class Cursando extends AppCompatActivity {
         @Override
         protected void onPostExecute(Object result){
             try {
+                pd.dismiss();
                 int val = cursando.getCursos().size();
-                String aux="";
-                List<String> auxiliar = new ArrayList<>();
                 for (int i = 0; i < val; i++) {
                     nombre.add(cursando.getCursos().get(i).getMateria());
-                    int val2 = cursando.getCursos().get(i).getHorarios().size();
-                    for (int j=0; j < val2;j++){
-                        auxiliar.add(cursando.getCursos().get(i).getHorarios().get(j).getDia());
-                    }
-                    aux = EraseElements(auxiliar);
-                    dias.add(aux);
-                    auxiliar.clear();
                 }
                 List<Tarea> TAREAS = new ArrayList<Tarea>();
                 for (int i=0; i < nombre.size(); i++)
-                    TAREAS.add(new Tarea(nombre.get(i), dias.get(i)));
+                    TAREAS.add(new Tarea(nombre.get(i), ""));
                 adaptador = new TareaArrayAdapter<Tarea>(Cursando.this, TAREAS);
                 lista.setAdapter(adaptador);
                 super.onPostExecute(result);
             }catch (Exception e){
                 e.printStackTrace();
             }
-        }
-
-        private String EraseElements(List<String> auxiliar){
-            HashSet hs = new HashSet();
-            hs.addAll(auxiliar);
-            auxiliar.clear();
-            auxiliar.addAll(hs);
-            String valores="";
-            for (int i=0; i < auxiliar.size();i++){
-                valores+= auxiliar.get(i)+" ";
-            }
-            return valores;
         }
     }
 

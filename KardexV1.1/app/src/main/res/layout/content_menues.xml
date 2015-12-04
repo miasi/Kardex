@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/formato1"
-        android:text="NOMBRE"
+        android:text="@string/Nombre"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/formato2"
         android:layout_below="@id/MENUnombreAlumno"
-        android:text="ESPECIALIDAD"
+        android:text="@string/Carrera"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/formato3"
         android:layout_below="@id/MENUnombreCarrera"
-        android:text="SEMESTRE"
+        android:text="@string/Semestre"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
     <TextView
         android:id="@+id/formato4"
         android:layout_below="@id/MENUnombreSemestre"
-        android:text="CREDITOS ACUMULADOS"
+        android:text="@string/Creditos"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
     <TextView
         android:id="@+id/formato5"
         android:layout_below="@id/MENUCreditos"
-        android:text="MODULO"
+        android:text="@string/Modulo"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
         android:layout_width="wrap_content"

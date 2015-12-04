@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/Titulo"
-        android:text="Materias en curso"
+        android:text="@string/tuscursos"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
         android:layout_width="wrap_content"
@@ -22,6 +22,6 @@
         android:layout_below="@+id/Titulo"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

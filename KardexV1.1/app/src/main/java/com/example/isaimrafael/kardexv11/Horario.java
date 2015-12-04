@@ -1,5 +1,7 @@
 package com.example.isaimrafael.kardexv11;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -38,6 +40,8 @@ public class Horario extends AppCompatActivity {
     private static List<ws_horario_aux> viernes;
     String control, password;
     private ws_cursando cursando;
+    private ProgressDialog pd = null;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class Horario extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        context = this;
         int display_mode = getResources().getConfiguration().orientation;
         if (display_mode == 1) {
             lunes = new ArrayList<>();
@@ -57,6 +62,7 @@ public class Horario extends AppCompatActivity {
             control = b.getString("control");
             password = b.getString("passWS");
             new descargar().execute("");
+            pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
         }else{
             lunes = new ArrayList<>();
             martes = new ArrayList<>();
@@ -67,6 +73,7 @@ public class Horario extends AppCompatActivity {
             control = b.getString("control");
             password = b.getString("passWS");
             new descargar().execute("");
+            pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
         }
     }
 
@@ -203,6 +210,7 @@ public class Horario extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
+            pd.dismiss();
             for (int i = 0; i < cursando.getCursos().size(); i++) {
                 ws_curso curso = cursando.getCursos().get(i);
                 // Aux Lists

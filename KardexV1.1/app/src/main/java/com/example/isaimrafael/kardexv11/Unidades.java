@@ -1,5 +1,7 @@
 package com.example.isaimrafael.kardexv11;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,14 +35,17 @@ public class Unidades extends AppCompatActivity {
     ListView unities;
     TareaArrayAdapter<Tarea> adaptador;
     ws_cursando cursando;
-    String control, password;
+    String control, password,palnombre;
     List<String> tituloUnidad;
     List<String> detalleUnidad;
     List<String> EnviarForo;
+    private Context context;
+    private ProgressDialog pd=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.unidades);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,12 +56,23 @@ public class Unidades extends AppCompatActivity {
         BaseDatos = new LocalDB(this, "Temporales", null,1);
         db = BaseDatos.getWritableDatabase();
         nombre = (TextView) findViewById(R.id.recibeNombre);
+        unities = (ListView) findViewById(R.id.ListaUnidades);
+        unities.setOnItemClickListener(abrirdetalle);
+        revision();
+
+        new descargarWS().execute("");
+        pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
+    }
+
+    private void revision(){
         Bundle b = getIntent().getExtras();
         if (b!= null) {
             nombre.setText(b.getString("nombre"));
             val = b.getInt("valor");
             control = b.getString("control");
             password = b.getString("contras");
+            db.execSQL("DROP TABLE IF EXISTS temporal;");
+            db.execSQL("DROP TABLE IF EXISTS temporal_dos;");
         }
         else {
             String query = "SELECT * FROM temporal;";
@@ -69,10 +85,19 @@ public class Unidades extends AppCompatActivity {
                     } while (cs.moveToNext());
                 }
             }
+            query = "SELECT * FROM temporal_dos;";
+            cs = db.rawQuery(query,null);
+            if (db != null){
+                if (cs.moveToFirst()){
+                    do{
+                        palnombre = cs.getString(0);
+                        val = Integer.parseInt(cs.getString(1));
+                    }while (cs.moveToNext());
+                    nombre.setText(palnombre);
+                }
+            }
+
         }
-        unities = (ListView) findViewById(R.id.ListaUnidades);
-        unities.setOnItemClickListener(abrirdetalle);
-        new descargarWS().execute("");
     }
 
     AdapterView.OnItemClickListener abrirdetalle = new AdapterView.OnItemClickListener() {
@@ -80,7 +105,9 @@ public class Unidades extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Bundle b = new Bundle();
             db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporal_dos (nombre TEXT, valor TEXT)");
             db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+control+"','"+password+"');");
+            db.execSQL("INSERT INTO temporal_dos (nombre, valor) VALUES ('"+nombre.getText()+"','"+ String.valueOf(val)+"');");
             b.putString("Control", control);
             b.putString("Password", password);
             b.putInt("Valor",val);
@@ -135,6 +162,7 @@ public class Unidades extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
+            pd.dismiss();
             EnviarForo.add(cursando.getCursos().get(val).getGrupos().get(0).getPlan());
             EnviarForo.add(String.valueOf(cursando.getCursos().get(val).getAnio()));
             EnviarForo.add(cursando.getCursos().get(val).getPeriodo());

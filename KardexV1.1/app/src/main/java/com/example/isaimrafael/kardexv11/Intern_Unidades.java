@@ -1,5 +1,7 @@
 package com.example.isaimrafael.kardexv11;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,12 +22,14 @@ public class Intern_Unidades extends AppCompatActivity {
 
     private ws_cursando cursando;
     TareaArrayAdapter<Tarea> adaptador;
-    List<String> tituloUnidad = new ArrayList<>();
-    List<String> detalleUnidad = new ArrayList<>();
-    List<Integer> calificacion = new ArrayList<>();
+    List<String> tituloUnidad;
+    List<String> detalleUnidad;
+    List<Integer> calificacion;
     ListView detalle;
     String control, password;
     int val, val2;
+    private ProgressDialog pd=null;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +38,17 @@ public class Intern_Unidades extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         detalle = (ListView)findViewById(R.id.DetalleUnidades);
+        context = this;
         Bundle b = getIntent().getExtras();
         control = b.getString("Control");
         password = b.getString("Password");
         val = b.getInt("Valor");
         val2 = b.getInt("Valor2");
+        tituloUnidad = new ArrayList<>();
+        detalleUnidad = new ArrayList<>();
+        calificacion = new ArrayList<>();
         new descargarWS().execute("");
+        pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
 
     }
 
@@ -53,18 +62,37 @@ public class Intern_Unidades extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
+            pd.dismiss();
             int vals = cursando.getCursos().get(val).getCalificaciones().size();
-            int val3 = val2+1;
+            int val3 = val2 + 1;
+            List<Integer> ponderacion = new ArrayList<>();
+            detalleUnidad.clear();
+            calificacion.clear();
             for (int i = 0; i < vals; i++) {
-                if (Integer.parseInt(cursando.getCursos().get(val).getCalificaciones().get(i).getUnidad())==val3) {
+                if (Integer.parseInt(cursando.getCursos().get(val).getCalificaciones().get(i).getUnidad()) == val3) {
                     tituloUnidad.add(cursando.getCursos().get(val).getCalificaciones().get(i).getUnidad());
                     detalleUnidad.add(cursando.getCursos().get(val).getCalificaciones().get(i).getCriterio());
                     calificacion.add(cursando.getCursos().get(val).getCalificaciones().get(i).getCalificacion());
+                    ponderacion.add(cursando.getCursos().get(val).getCalificaciones().get(i).getPonderacion());
                 }
             }
+            int prom = 0;
+            for (int i = 0; i < calificacion.size(); i++) {
+                float mult = ponderacion.get(i) / 100f;
+                mult = mult * calificacion.get(i);
+                prom += mult;
+            }
+            detalleUnidad.add("Calificacion de unidad");
+            calificacion.add(prom);
             List<Tarea> TAREAS = new ArrayList<Tarea>();
             for (int i = 0; i < detalleUnidad.size(); i++)
-                TAREAS.add(new Tarea(detalleUnidad.get(i),String.valueOf(calificacion.get(i))));
+                if (detalleUnidad.get(i).equals("Calificacion de unidad")) {
+                    if (calificacion.get(i) >= 70)
+                        TAREAS.add(new Tarea(detalleUnidad.get(i), String.valueOf(calificacion.get(i))));
+                    else
+                        TAREAS.add(new Tarea(detalleUnidad.get(i), "NA"));
+                } else
+                    TAREAS.add(new Tarea(detalleUnidad.get(i), String.valueOf(calificacion.get(i))));
             adaptador = new TareaArrayAdapter<Tarea>(Intern_Unidades.this, TAREAS);
             detalle.setAdapter(adaptador);
             super.onPostExecute(result);
@@ -74,7 +102,9 @@ public class Intern_Unidades extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
+        adaptador.clear();
         Intern_Unidades.this.finish();
+        finish();
     }
 
 }

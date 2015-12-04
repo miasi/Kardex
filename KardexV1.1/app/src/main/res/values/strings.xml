@@ -6,7 +6,7 @@
 
     <!--TITULO DE ACTIVITIES -->
     <string name="title_activity_mapa">Map</string>
-    <string name="title_activity_cursando">Cursando</string>
+    <string name="title_activity_cursando">Cursando actualmente</string>
     <string name="title_activity_horario">Horario</string>
     <string name="title_activity_horario_maestro">Maestros en curso</string>
     <string name="title_activity_unidades">Unidades</string>
@@ -31,6 +31,13 @@
     <string name="numerocontrol">Numero de control</string>
     <string name="contrasena">Contraseña</string>
     <string name="acceder">Acceder</string>
+
+    <!-- MENUES -->
+    <string name="Nombre">NOMBRE</string>
+    <string name="Carrera">CARRERA</string>
+    <string name="Semestre">SEMESTRE</string>
+    <string name="Creditos">CREDITOS ACUMULADOS</string>
+    <string name="Modulo">MODULO DE ESPECIALIDAD</string>
 
     <string name="tuscursos">Materias en curso</string>
 </resources>

@@ -48,22 +48,24 @@ public class Menues extends AppCompatActivity
         if (b!= null) {
             contr = b.getString("control");
             pass = b.getString("passWS");
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
+            db.execSQL("DROP TABLE IF EXISTS temporalMenu;");
             new descargar().execute("");
         }
         else{
-            String query = "SELECT * FROM temporal;";
-            Cursor cs = db.rawQuery(query,null);
-            if (db!= null){
-                if (cs.moveToFirst()){
-                    do{
-                        contr = cs.getString(0);
-                        pass = cs.getString(1);
-                    }while (cs.moveToNext());
+            try {
+                String query = "SELECT * FROM temporalMenu;";
+                Cursor cs = db.rawQuery(query, null);
+                if (db != null) {
+                    if (cs.moveToFirst()) {
+                        do {
+                            contr = cs.getString(0);
+                            pass = cs.getString(1);
+                        } while (cs.moveToNext());
+                    }
+                    new descargar().execute("");
                 }
-                db.execSQL("DROP TABLE temporal;");
-                new descargar().execute("");
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     }
@@ -150,8 +152,8 @@ public class Menues extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cursando) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporalMenu (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporalMenu (control, passw) VALUES ('"+contr+"','"+pass+"');");
             i = new Intent(Menues.this, Cursando.class);
             Bundle b = new Bundle();
             b.putString("control", contr);
@@ -160,8 +162,8 @@ public class Menues extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.horario) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporalMenu (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporalMenu (control, passw) VALUES ('"+contr+"','"+pass+"');");
             i = new Intent(Menues.this, Horario.class);
             Bundle b = new Bundle();
             b.putString("control", contr);
@@ -170,8 +172,8 @@ public class Menues extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.hoariomaestro) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporalMenu (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporalMenu (control, passw) VALUES ('"+contr+"','"+pass+"');");
             i = new Intent(Menues.this, HorarioMaestro.class);
             Bundle b = new Bundle();
             b.putString("control", contr);
@@ -180,8 +182,8 @@ public class Menues extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.mapa) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporalMenu (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporalMenu (control, passw) VALUES ('"+contr+"','"+pass+"');");
             i = new Intent(Menues.this, MapaTec.class);
             Bundle bun = new Bundle();
             String pal = "hello";

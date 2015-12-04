@@ -25,25 +25,12 @@ public class HorarioMaestro extends AppCompatActivity {
     SQLiteDatabase db;
     String control, password;
     ws_cursando cursando;
-    ws_horario_maestro maestros;
+    //ws_horario_maestro maestros;
     List<String> nombreMaestro;
     TareaArrayAdapter<Tarea> adaptador;
-    List<String> nombre = new ArrayList<>();
+    //List<String> nombre = new ArrayList<>();
     List<String> dias = new ArrayList<>();
     private ListView lista;
-    AdapterView.OnItemClickListener golistaHora = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Bundle b = new Bundle();
-            Tarea nombres = (Tarea) lista.getItemAtPosition(position);
-            String nombre = nombres.getNombre();
-            b.putString("Password", password);
-            b.putString("Nombre", nombre);
-            Intent i = new Intent(HorarioMaestro.this, HorarioReal_maestro.class);
-            i.putExtras(b);
-            startActivity(i);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +48,9 @@ public class HorarioMaestro extends AppCompatActivity {
         if (b!= null) {
             control = b.getString("control");
             password = b.getString("passWS");
-            db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
-            db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+control+"','"+password+"');");
+            db.execSQL("DROP TABLE IF EXISTS temporalHorario");
         }else {
-            String query = "SELECT * FROM temporal;";
+            String query = "SELECT * FROM temporalHorario;";
             Cursor cs = db.rawQuery(query, null);
             if (db != null) {
                 if (cs.moveToFirst()) {
@@ -80,6 +66,22 @@ public class HorarioMaestro extends AppCompatActivity {
         lista.setOnItemClickListener(golistaHora);
         new descargar().execute("");
     }
+
+    AdapterView.OnItemClickListener golistaHora = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Bundle b = new Bundle();
+            db.execSQL("CREATE TABLE IF NOT EXISTS temporalHorario (control TEXT, passw TEXT)");
+            db.execSQL("INSERT INTO temporalHorario (control, passw) VALUES ('"+control+"','"+password+"');");
+            Tarea nombres = (Tarea) lista.getItemAtPosition(position);
+            String nombre = nombres.getNombre();
+            b.putString("Password", password);
+            b.putString("Nombre", nombre);
+            Intent i = new Intent(HorarioMaestro.this, HorarioReal_maestro.class);
+            i.putExtras(b);
+            startActivity(i);
+        }
+    };
 
     private class descargar extends AsyncTask<String, Void, Object> {
 

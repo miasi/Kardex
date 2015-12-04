@@ -33,5 +33,12 @@
     <string name="contrasena">Password</string>
     <string name="acceder">Login</string>
 
+    <!-- MENUES -->
+    <string name="Nombre">NAME</string>
+    <string name="Carrera">CAREER</string>
+    <string name="Semestre">SEMESTER</string>
+    <string name="Creditos">CURRENT CREDITS</string>
+    <string name="Modulo">SPECIALITY MODULE</string>
+
     <string name="tuscursos">Your subjects</string>
 </resources>

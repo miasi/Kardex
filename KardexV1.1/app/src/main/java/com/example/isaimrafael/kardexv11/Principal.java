@@ -1,5 +1,6 @@
 package com.example.isaimrafael.kardexv11;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -19,6 +20,8 @@ import com.example.isaimrafael.kardexv11.web_service.ws_login;
 public class Principal extends AppCompatActivity {
 
     String obControl, obContra;
+    private ProgressDialog pd = null;
+    private Context context;
     private EditText control, contra;
     private Button acceder;
     private String res;
@@ -32,6 +35,7 @@ public class Principal extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logopng_opt);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+        context = this;
         control = (EditText) findViewById(R.id.editText2);
         contra = (EditText) findViewById(R.id.editText);
         acceder = (Button) findViewById(R.id.button);
@@ -59,9 +63,9 @@ public class Principal extends AppCompatActivity {
             obContra = contra.getText().toString().toUpperCase();
             online();
             new Descargar().execute("");
+            pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
         }
     };
-
 
     protected void online() {
         if (!conectadoWifi() & !conectadoDatos()) {
@@ -143,8 +147,13 @@ public class Principal extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
-            if (regresar != 0) {
-                Toast.makeText(Principal.this, "El numero de control y/o\ncontraseña es incorrecto", Toast.LENGTH_SHORT).show();
+            try {
+                pd.dismiss();
+                if (regresar != 0) {
+                    Toast.makeText(Principal.this, "El numero de control y/o\ncontraseña es incorrecto", Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     }

@@ -7,7 +7,7 @@
 
     <!--TITULO DE ACTIVITIES -->
     <string name="title_activity_mapa">Map</string>
-    <string name="title_activity_cursando">Cursando</string>
+    <string name="title_activity_cursando">Cursando actualmente</string>
     <string name="title_activity_horario">Horario</string>
     <string name="title_activity_horario_maestro">Maestros en curso</string>
     <string name="title_activity_unidades">Unidades</string>
