@@ -129,7 +129,7 @@ public class Unidades extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(String... params) {
-            cursando = new ws_cursando(control, password);
+            cursando = new ws_cursando(control,password);
             return 1;
         }
 

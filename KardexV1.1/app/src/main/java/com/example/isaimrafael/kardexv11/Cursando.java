@@ -77,7 +77,6 @@ public class Cursando extends AppCompatActivity {
         @Override
         protected Object doInBackground(String... params) {
             cursando = new ws_cursando(contr,pass);
-            int r = 1+1;
             return 1;
         }
 

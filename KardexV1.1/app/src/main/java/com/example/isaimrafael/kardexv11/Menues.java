@@ -25,7 +25,6 @@ public class Menues extends AppCompatActivity
 
     LocalDB BaseDatos;
     SQLiteDatabase db;
-    private String res;
     private String contr, pass;
     List<String> parametros = new ArrayList<String>();
     List<String> valores = new ArrayList<String>();
@@ -52,7 +51,8 @@ public class Menues extends AppCompatActivity
             db.execSQL("CREATE TABLE IF NOT EXISTS temporal (control TEXT, passw TEXT)");
             db.execSQL("INSERT INTO temporal (control, passw) VALUES ('"+contr+"','"+pass+"');");
             new descargar().execute("");
-        }else{
+        }
+        else{
             String query = "SELECT * FROM temporal;";
             Cursor cs = db.rawQuery(query,null);
             if (db!= null){

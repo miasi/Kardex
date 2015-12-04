@@ -20,10 +20,23 @@ public class Principal extends AppCompatActivity {
 
     String obControl, obContra;
     private EditText control, contra;
-    private Button acceder, ubicanos;
+    private Button acceder;
     private String res;
     public static String passWS = "a8%x*5$d4#1";
     private int regresar = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.principal);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logopng_opt);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        control = (EditText) findViewById(R.id.editText2);
+        contra = (EditText) findViewById(R.id.editText);
+        acceder = (Button) findViewById(R.id.button);
+        acceder.setOnClickListener(AccederOnClickLister);
+    }
 
     public static String MD5(String md5) {
         try {
@@ -49,18 +62,6 @@ public class Principal extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.principal);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.logopng_opt);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        control = (EditText) findViewById(R.id.editText2);
-        contra = (EditText) findViewById(R.id.editText);
-        acceder = (Button) findViewById(R.id.button);
-        acceder.setOnClickListener(AccederOnClickLister);
-    }
 
     protected void online() {
         if (!conectadoWifi() & !conectadoDatos()) {

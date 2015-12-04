@@ -46,15 +46,28 @@ public class Horario extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        lunes = new ArrayList<>();
-        martes = new ArrayList<>();
-        miercoles = new ArrayList<>();
-        jueves = new ArrayList<>();
-        viernes = new ArrayList<>();
-        Bundle b = getIntent().getExtras();
-        control = b.getString("control");
-        password = b.getString("passWS");
-        new descargar().execute("");
+        int display_mode = getResources().getConfiguration().orientation;
+        if (display_mode == 1) {
+            lunes = new ArrayList<>();
+            martes = new ArrayList<>();
+            miercoles = new ArrayList<>();
+            jueves = new ArrayList<>();
+            viernes = new ArrayList<>();
+            Bundle b = getIntent().getExtras();
+            control = b.getString("control");
+            password = b.getString("passWS");
+            new descargar().execute("");
+        }else{
+            lunes = new ArrayList<>();
+            martes = new ArrayList<>();
+            miercoles = new ArrayList<>();
+            jueves = new ArrayList<>();
+            viernes = new ArrayList<>();
+            Bundle b = getIntent().getExtras();
+            control = b.getString("control");
+            password = b.getString("passWS");
+            new descargar().execute("");
+        }
     }
 
     private String getMin(List<ws_horario> horarios) {
