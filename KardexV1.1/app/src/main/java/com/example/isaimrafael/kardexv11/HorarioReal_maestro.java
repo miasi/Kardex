@@ -111,7 +111,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     }
                     break;
                 }
-                case 2:
+                case 2: {
                     textView.setText("Clases del dia Martes");
                     pals = new String[martes.size()];
                     horas = new String[martes.size()];
@@ -120,7 +120,8 @@ public class HorarioReal_maestro extends AppCompatActivity {
                         horas[i] = martes.get(i).getHorario();
                     }
                     break;
-                case 3:
+                }
+                case 3: {
                     textView.setText("Clases del dia Miercoles");
                     pals = new String[miercoles.size()];
                     horas = new String[miercoles.size()];
@@ -129,8 +130,8 @@ public class HorarioReal_maestro extends AppCompatActivity {
                         horas[i] = miercoles.get(i).getHorario();
                     }
                     break;
-                case 4:
-
+                }
+                case 4: {
                     textView.setText("Clases del dia Jueves");
                     pals = new String[jueves.size()];
                     horas = new String[jueves.size()];
@@ -139,7 +140,8 @@ public class HorarioReal_maestro extends AppCompatActivity {
                         horas[i] = jueves.get(i).getHorario();
                     }
                     break;
-                case 5:
+                }
+                case 5: {
                     textView.setText("Clases del dia Viernes");
                     pals = new String[viernes.size()];
                     horas = new String[viernes.size()];
@@ -148,6 +150,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                         horas[i] = viernes.get(i).getHorario();
                     }
                     break;
+                }
             }
         }
     }
@@ -178,7 +181,7 @@ public class HorarioReal_maestro extends AppCompatActivity {
                     auxMiercoles.add(horario);
                 } else if (horario.getDia().toLowerCase().equals("jueves")) {
                     auxJueves.add(horario);
-                } else if (horario.getDia().toLowerCase().equals("viernes")) {
+                } else if (horario.getDia().toLowerCase().equals("viernes") || horario.getDia().toLowerCase().equals("vienes")) {
                     auxViernes.add(horario);
                 }
             }
@@ -190,17 +193,28 @@ public class HorarioReal_maestro extends AppCompatActivity {
             auxViernes = sortList(auxViernes);
             // Lunes
             if (auxLunes.size() > 0) {
-                int length = auxLunes.size() - 1;
+                int length = auxLunes.size() - 1; // Por el do..while.
                 int i = 0;
                 do {
                     ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
                     aux.setDia(auxLunes.get(i).getDia());
                     aux.setHora(auxLunes.get(i).getHora());
                     aux.setLugar(auxLunes.get(i).getLugar());
-                    while (aux.getLugar().equals(auxLunes.get(i).getLugar()) && i < length) {
-                        i++;
+                    i++;
+                    while (i < length) {
+                        if (aux.getLugar().equals(auxLunes.get(i).getLugar())) {
+                            String hora = Integer.toString(Integer.parseInt(auxLunes.get(i - 1).getHora()) + 1);
+                            if (hora.equals(auxLunes.get(i).getHora())) {
+                                i++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
                     }
                     if (i < length) {
+                        // Guarda el valor anterior, por que después de comparar avanzo.
                         aux.setHoraFin(auxLunes.get(i - 1).getHora());
                     } else {
                         aux.setHoraFin(auxLunes.get(i).getHora());
@@ -210,17 +224,28 @@ public class HorarioReal_maestro extends AppCompatActivity {
             }
             // Martes
             if (auxMartes.size() > 0) {
-                int length = auxMartes.size() - 1;
+                int length = auxMartes.size() - 1; // Por el do..while.
                 int i = 0;
                 do {
                     ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
                     aux.setDia(auxMartes.get(i).getDia());
                     aux.setHora(auxMartes.get(i).getHora());
                     aux.setLugar(auxMartes.get(i).getLugar());
-                    while (aux.getLugar().equals(auxMartes.get(i).getLugar()) && i < length) {
-                        i++;
+                    i++;
+                    while (i < length) {
+                        if (aux.getLugar().equals(auxMartes.get(i).getLugar())) {
+                            String hora = Integer.toString(Integer.parseInt(auxMartes.get(i - 1).getHora()) + 1);
+                            if (hora.equals(auxMartes.get(i).getHora())) {
+                                i++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
                     }
                     if (i < length) {
+                        // Guarda el valor anterior, por que después de comparar avanzo.
                         aux.setHoraFin(auxMartes.get(i - 1).getHora());
                     } else {
                         aux.setHoraFin(auxMartes.get(i).getHora());
@@ -230,17 +255,28 @@ public class HorarioReal_maestro extends AppCompatActivity {
             }
             // Miercoles
             if (auxMiercoles.size() > 0) {
-                int length = auxMiercoles.size() - 1;
+                int length = auxMiercoles.size() - 1; // Por el do..while.
                 int i = 0;
                 do {
                     ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
                     aux.setDia(auxMiercoles.get(i).getDia());
                     aux.setHora(auxMiercoles.get(i).getHora());
                     aux.setLugar(auxMiercoles.get(i).getLugar());
-                    while (aux.getLugar().equals(auxMiercoles.get(i).getLugar()) && i < length) {
-                        i++;
+                    i++;
+                    while (i < length) {
+                        if (aux.getLugar().equals(auxMiercoles.get(i).getLugar())) {
+                            String hora = Integer.toString(Integer.parseInt(auxMiercoles.get(i - 1).getHora()) + 1);
+                            if (hora.equals(auxMiercoles.get(i).getHora())) {
+                                i++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
                     }
                     if (i < length) {
+                        // Guarda el valor anterior, por que después de comparar avanzo.
                         aux.setHoraFin(auxMiercoles.get(i - 1).getHora());
                     } else {
                         aux.setHoraFin(auxMiercoles.get(i).getHora());
@@ -250,17 +286,28 @@ public class HorarioReal_maestro extends AppCompatActivity {
             }
             // Jueves
             if (auxJueves.size() > 0) {
-                int length = auxJueves.size() - 1;
+                int length = auxJueves.size() - 1; // Por el do..while.
                 int i = 0;
                 do {
                     ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
                     aux.setDia(auxJueves.get(i).getDia());
                     aux.setHora(auxJueves.get(i).getHora());
                     aux.setLugar(auxJueves.get(i).getLugar());
-                    while (aux.getLugar().equals(auxJueves.get(i).getLugar()) && i < length) {
-                        i++;
+                    i++;
+                    while (i < length) {
+                        if (aux.getLugar().equals(auxJueves.get(i).getLugar())) {
+                            String hora = Integer.toString(Integer.parseInt(auxJueves.get(i - 1).getHora()) + 1);
+                            if (hora.equals(auxJueves.get(i).getHora())) {
+                                i++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
                     }
                     if (i < length) {
+                        // Guarda el valor anterior, por que después de comparar avanzo.
                         aux.setHoraFin(auxJueves.get(i - 1).getHora());
                     } else {
                         aux.setHoraFin(auxJueves.get(i).getHora());
@@ -270,17 +317,28 @@ public class HorarioReal_maestro extends AppCompatActivity {
             }
             // Viernes
             if (auxViernes.size() > 0) {
-                int length = auxViernes.size() - 1;
+                int length = auxViernes.size() - 1; // Por el do..while.
                 int i = 0;
                 do {
                     ws_horario_maestro_personal aux = new ws_horario_maestro_personal();
                     aux.setDia(auxViernes.get(i).getDia());
                     aux.setHora(auxViernes.get(i).getHora());
                     aux.setLugar(auxViernes.get(i).getLugar());
-                    while (aux.getLugar().equals(auxViernes.get(i).getLugar()) && i < length) {
-                        i++;
+                    i++;
+                    while (i < length) {
+                        if (aux.getLugar().equals(auxViernes.get(i).getLugar())) {
+                            String hora = Integer.toString(Integer.parseInt(auxViernes.get(i - 1).getHora()) + 1);
+                            if (hora.equals(auxViernes.get(i).getHora())) {
+                                i++;
+                            } else {
+                                break;
+                            }
+                        } else {
+                            break;
+                        }
                     }
                     if (i < length) {
+                        // Guarda el valor anterior, por que después de comparar avanzo.
                         aux.setHoraFin(auxViernes.get(i - 1).getHora());
                     } else {
                         aux.setHoraFin(auxViernes.get(i).getHora());
