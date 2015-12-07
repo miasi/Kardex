@@ -169,7 +169,6 @@ public class Unidades extends AppCompatActivity {
             EnviarForo.add(cursando.getCursos().get(val).getMateria());
             EnviarForo.add(cursando.getCursos().get(val).getGrupo());
             EnviarForo.add(cursando.getCursos().get(val).getAlumno());
-
             int vals = cursando.getCursos().get(val).getCalificaciones().size();
             for (int i = 0; i < vals; i++) {
                 tituloUnidad.add(cursando.getCursos().get(val).getCalificaciones().get(i).getUnidad());
@@ -183,15 +182,77 @@ public class Unidades extends AppCompatActivity {
                 auxi.add(Integer.parseInt(tituloUnidad.get(i)));
             }
             Collections.sort(auxi);
-            for (int bor=0; bor < tituloUnidad.size(); bor++)
-                detalleUnidad.add(" ");
+            List<String> finalfinal = new ArrayList<>();
+            for (int qw=0; qw < auxi.size();qw++){
+                finalfinal.add("Unidad "+auxi.get(qw));
+            }
+            detalleUnidad = promedio_general(val);
+            finalfinal.add("Calificación final");
             List<Tarea> TAREAS = new ArrayList<Tarea>();
-            for (int i = 0; i < tituloUnidad.size(); i++)
-                TAREAS.add(new Tarea("Unidad " + auxi.get(i), detalleUnidad.get(i)));
+            for (int i = 0; i < finalfinal.size(); i++)
+                TAREAS.add(new Tarea(finalfinal.get(i), detalleUnidad.get(i)));
             adaptador = new TareaArrayAdapter<Tarea>(Unidades.this, TAREAS);
             unities.setAdapter(adaptador);
             super.onPostExecute(result);
         }
+    }
+
+    private List<String> promedio_general(int valores) {
+        List<Integer> promedio = new ArrayList<>();
+        List<String> valoresProm = new ArrayList<>();
+        int val3 = 1;
+        int i = 0;
+        List<Integer> ponderacion = new ArrayList<>();
+        detalleUnidad.clear();
+        List<Integer> calificacion = new ArrayList<>();
+        int hasta = cursando.getCursos().get(valores).getCalificaciones().size();
+        for (i = 0; i < hasta; i++) {
+            if (Integer.parseInt(cursando.getCursos().get(valores).getCalificaciones().get(i).getUnidad()) == val3) {
+                calificacion.add(cursando.getCursos().get(valores).getCalificaciones().get(i).getCalificacion());
+                ponderacion.add(cursando.getCursos().get(valores).getCalificaciones().get(i).getPonderacion());
+            } else {
+                int prom = 0;
+                for (int ii = 0; ii < calificacion.size(); ii++) {
+                    float mult = ponderacion.get(ii) / 100f;
+                    mult = mult * calificacion.get(ii);
+                    prom += mult;
+                }
+                promedio.add(prom);
+                calificacion.clear();
+                ponderacion.clear();
+                if (prom > 70)
+                valoresProm.add("Calificación: "+String.valueOf(prom));
+                else
+                valoresProm.add("NA");
+                val3++;
+                i--;
+            }
+        }
+        if (hasta == i) {
+            int prom = 0;
+            for (int ii = 0; ii < calificacion.size(); ii++) {
+                float mult = ponderacion.get(ii) / 100f;
+                mult = mult * calificacion.get(ii);
+                prom += mult;
+            }
+            if (prom > 70)
+            valoresProm.add("Calificación: "+String.valueOf(prom));
+            else
+            valoresProm.add("NA");
+            promedio.add(prom);
+            calificacion.clear();
+            ponderacion.clear();
+        }
+        int vals = 0;
+        for (int gh = 0; gh < promedio.size(); gh++) {
+            vals += promedio.get(gh);
+        }
+        int vals2 = vals / promedio.size();
+        if (vals2 > 70)
+            valoresProm.add("Calificación: "+String.valueOf(vals2));
+        else
+            valoresProm.add(String.valueOf("NA"));
+        return valoresProm;
     }
     //endregion
 }

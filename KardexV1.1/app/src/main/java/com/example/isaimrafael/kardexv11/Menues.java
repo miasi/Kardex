@@ -114,6 +114,8 @@ public class Menues extends AppCompatActivity
                 logo.setImageResource(R.drawable.logo_administracion);
             else if (nomcarrera.getText().equals("ingenieria bioquimica"))
                 logo.setImageResource(R.drawable.logo_bioquimica);
+            else if (nomcarrera.getText().equals("arquitectura"))
+                logo.setImageResource(R.drawable.logo_arquitec);
         }catch (Exception e){
             e.printStackTrace();
         }

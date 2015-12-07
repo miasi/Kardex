@@ -26,7 +26,7 @@
     <string name="ubicaciones">Locations</string>
     <string name="mapas">Map</string>
     <string name="cerrar_sesion">End Sesion</string>
-    <string name="salida">Salir</string>
+    <string name="salida">Exit</string>
     <!-- Principal -->
     <string name="accesokardex">Kardex Login</string>
     <string name="numerocontrol">Control number</string>

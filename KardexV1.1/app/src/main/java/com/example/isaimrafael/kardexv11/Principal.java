@@ -67,6 +67,7 @@ public class Principal extends AppCompatActivity {
         }
     };
 
+    //region checkConection
     protected void online() {
         if (!conectadoWifi() & !conectadoDatos()) {
             Toast.makeText(Principal.this, "No hay conexion a internet", Toast.LENGTH_SHORT).show();
@@ -96,14 +97,15 @@ public class Principal extends AppCompatActivity {
         }
         return false;
     }
+    //endregion
 
     @Override
     protected void onResume() {
         super.onResume();
         control.setText("");
         contra.setText("");
-        control.setHint("Numero de control");
-        contra.setHint("Contraseña");
+        control.setHint(R.string.numerocontrol);
+        contra.setHint(R.string.contrasena);
         control.requestFocus();
     }
 

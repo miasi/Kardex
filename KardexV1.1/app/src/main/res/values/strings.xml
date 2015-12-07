@@ -38,6 +38,51 @@
     <string name="Semestre">SEMESTRE</string>
     <string name="Creditos">CREDITOS ACUMULADOS</string>
     <string name="Modulo">MODULO DE ESPECIALIDAD</string>
+    <string name="desliza">Dezlize a la derecha u oprima el boton de menu en la esquina superior izquierda</string>
 
     <string name="tuscursos">Materias en curso</string>
+
+    <string-array name="ItemsSalones">
+        <item>Aulas</item>
+        <item>E</item>
+        <item>D</item>
+        <item>C</item>
+        <item>B</item>
+        <item>H</item>
+        <item>L</item>
+        <item>O</item>
+        <item>S</item>
+        <item>T</item>
+        <item>MC</item>
+        <item>CS</item>
+        <item>MD</item>
+        <item>Pintura</item>
+    </string-array>
+
+    <string-array name="ItemsLabs">
+        <item>Laboratorios</item>
+        <item>Bioquimica</item>
+        <item>Civil</item>
+        <item>Computo</item>
+        <item>Biotecnologia</item>
+        <item>Sistemas</item>
+        <item>Industrial</item>
+        <item>Fisica</item>
+        <item>Quimica</item>
+        <item>Electromecanica</item>
+        <item>Econ/Admin</item>
+    </string-array>
+
+    <string-array name="ItemsAdmin">
+        <item>Ed. Admin</item>
+        <item>Capi</item>
+        <item>Difusión</item>
+        <item>Incubadora</item>
+        <item>Cafeteria</item>
+        <item>Biblioteca</item>
+        <item>C. computo</item>
+        <item>Div. estudios</item>
+        <item>Ingenierias</item>
+        <item>Ed. admin</item>
+    </string-array>
 </resources>

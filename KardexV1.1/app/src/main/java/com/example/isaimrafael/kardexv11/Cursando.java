@@ -57,9 +57,7 @@ public class Cursando extends AppCompatActivity {
         if (b!= null) {
             contr = b.getString("control");
             pass = b.getString("passWS");
-            new descargar().execute("");
-            pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
-            db.execSQL("DROP TABLE temporalDos;");
+            db.execSQL("DROP TABLE IF EXISTS temporalDos;");
         }else{
             String query = "SELECT * FROM temporalDos;";
             Cursor cs = db.rawQuery(query,null);
@@ -70,17 +68,21 @@ public class Cursando extends AppCompatActivity {
                         pass = cs.getString(1);
                     }while (cs.moveToNext());
                 }
-                new descargar().execute("");
-                pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
             }
         }
+        new descargar().execute("");
+        pd = ProgressDialog.show(context, "Porfavor espere", "Consultando datos del ITLP", true, false);
     }
 
     private class descargar extends AsyncTask<String, Void, Object> {
 
         @Override
         protected Object doInBackground(String... params) {
-            cursando = new ws_cursando(contr,pass);
+            try {
+                cursando = new ws_cursando(contr, pass);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return 1;
         }
 

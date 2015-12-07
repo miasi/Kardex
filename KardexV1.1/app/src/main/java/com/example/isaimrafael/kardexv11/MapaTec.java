@@ -1,13 +1,13 @@
 package com.example.isaimrafael.kardexv11;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapaTec extends AppCompatActivity {
 
     GoogleMap mapa;
+    Spinner aulas, labs, admins;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +30,18 @@ public class MapaTec extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mapa = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        aulas = (Spinner) findViewById(R.id.spinnerAulas);
+        labs = (Spinner) findViewById(R.id.spinnerLabs);
+        admins = (Spinner) findViewById(R.id.spinnerAdmin);
+        aulas.setOnItemSelectedListener(SelecAula);
+        admins.setOnItemSelectedListener(SelecAdmins);
+        labs.setOnItemSelectedListener(SelecLabs);
+        mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mapa.setMyLocationEnabled(true);
+        Inicializador_mapa();
+    }
+
+    private void Inicializador_mapa(){
         int display_mode = getResources().getConfiguration().orientation;
         Bundle b = getIntent().getExtras();
         if (b != null) {
@@ -70,6 +81,255 @@ public class MapaTec extends AppCompatActivity {
         }
 
     }
+
+    //region OnItemSelected Aulas
+
+    AdapterView.OnItemSelectedListener SelecAula = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            GoogleMap mapa2 = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+            labs.setSelection(0);
+            admins.setSelection(0);
+            switch (position){
+                case 1:
+                    mapa2.clear();
+                    LatLng SalonesE = new LatLng(24.121190, -110.310249);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesE).title("Aulas E")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 2:
+                    mapa2.clear();
+                    LatLng SalonesD = new LatLng(24.120991, -110.310472);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesD).title("Aulas D")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 3:
+                    mapa2.clear();
+                    LatLng SalonesC = new LatLng(24.120719, -110.310536);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesC).title("Aulas C")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 4:
+                    mapa2.clear();
+                    LatLng SalonesB = new LatLng(24.120315, -110.310499);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesB).title("Aulas B")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 5:
+                    mapa2.clear();
+                    LatLng SalonesH = new LatLng(24.119382, -110.310385);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesH).title("Aulas H")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 6:
+                    mapa2.clear();
+                    LatLng SalonesL = new LatLng(24.118695, -110.310174);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesL).title("Aulas L")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 7:
+                    mapa2.clear();
+                    LatLng SalonesO  = new LatLng(24.120362, -110.309644);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesO).title("Aulas O")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 8:
+                    mapa2.clear();
+                    LatLng salonesS = new LatLng(24.119690, -110.309291);
+                    mapa2.addMarker(new MarkerOptions().position(salonesS).title("Aulas S")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 9:
+                    mapa2.clear();
+                    LatLng salonT = new LatLng(24.120071, -110.309014);
+                    mapa2.addMarker(new MarkerOptions().position(salonT).title("Aulas T")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 10:
+                    mapa2.clear();
+                    LatLng Macro = new LatLng(24.119062, -110.309047);
+                    mapa2.addMarker(new MarkerOptions().position(Macro).title("Aulas MC")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 11:
+                    mapa2.clear();
+                    LatLng SalonesCS = new LatLng(24.118732, -110.308713);
+                    mapa2.addMarker(new MarkerOptions().position(SalonesCS).title("Aulas CS")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 12:
+                    mapa2.clear();
+                    LatLng Posgrado = new LatLng(24.118994, -110.308519);
+                    mapa2.addMarker(new MarkerOptions().position(Posgrado).title("Aulas MD")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+                case 13:
+                    mapa2.clear();
+                    LatLng pintura  = new LatLng(24.119569, -110.309806);
+                    mapa2.addMarker(new MarkerOptions().position(pintura).title("Taller de pintura")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))).showInfoWindow();
+                    break;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    //endregion
+
+    //region OnItemSelected Labotatorios
+    AdapterView.OnItemSelectedListener SelecLabs = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            aulas.setSelection(0);
+            admins.setSelection(0);
+            GoogleMap mapa2 = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+            switch (position){
+                case 1:
+                    mapa2.clear();
+                    LatLng bioq = new LatLng(24.119201, -110.310511);
+                    mapa2.addMarker(new MarkerOptions().position(bioq).title("Lab. Ing. Bioquimica")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 2:
+                    mapa2.clear();
+                    LatLng civil = new LatLng(24.118890, -110.310451);
+                    mapa2.addMarker(new MarkerOptions().position(civil).title("Lab. Ing. Civil")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 3:
+                    mapa2.clear();
+                    LatLng Ccomputo  = new LatLng(24.119637, -110.310185);
+                    mapa2.addMarker(new MarkerOptions().position(Ccomputo).title("Centro de computo")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).showInfoWindow();
+                    break;
+                case 4:
+                    mapa2.clear();
+                    LatLng biotecnologia = new LatLng(24.119378, -110.309535);
+                    mapa2.addMarker(new MarkerOptions().position(biotecnologia).title("Lab. de Biotecnologia")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 5:
+                    mapa2.clear();
+                    LatLng Macro = new LatLng(24.119062, -110.309047);
+                    mapa2.addMarker(new MarkerOptions().position(Macro).title("Lab. Ing. Sistemas")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 6:
+                    mapa2.clear();
+                    LatLng industrial = new LatLng(24.119914, -110.309351);
+                    mapa2.addMarker(new MarkerOptions().position(industrial).title("Lab. Industrial")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 7:
+                    mapa2.clear();
+                    LatLng fisica = new LatLng(24.120071, -110.309014);
+                    mapa2.addMarker(new MarkerOptions().position(fisica).title("Lab. de Fisica")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 8:
+                    mapa2.clear();
+                    LatLng quimica = new LatLng(24.120608, -110.309344);
+                    mapa2.addMarker(new MarkerOptions().position(quimica).title("Lab. de Quimica")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 9:
+                    mapa2.clear();
+                    LatLng electro = new LatLng(24.120939, -110.309337);
+                    mapa2.addMarker(new MarkerOptions().position(electro).title("Lab. Ing. Electromecanica")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+                case 10:
+                    mapa2.clear();
+                    LatLng ecoadmin = new LatLng(24.120957, -110.309835);
+                    mapa2.addMarker(new MarkerOptions().position(ecoadmin).title("Lab. computo Economico/Administrativas")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).showInfoWindow();
+                    break;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+    //endregion
+
+    //region OnItemSelected Administrativos
+    AdapterView.OnItemSelectedListener SelecAdmins = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            admins.setSelection(0);
+            aulas.setSelection(0);
+            GoogleMap mapa2 = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+            switch (position) {
+                case 1:
+                    mapa2.clear();
+                    LatLng capi = new LatLng(24.120400, -110.308397);
+                    mapa2.addMarker(new MarkerOptions().position(capi).title("CAPI")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).showInfoWindow();
+                    break;
+                case 2:
+                    mapa2.clear();
+                    LatLng difusion = new LatLng(24.120782, -110.309042);
+                    mapa2.addMarker(new MarkerOptions().position(difusion).title("Depto. de difusion y comunicación")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).showInfoWindow();
+                    break;
+                case 3:
+                    mapa2.clear();
+                    LatLng incubadora = new LatLng(24.120339, -110.309218);
+                    mapa2.addMarker(new MarkerOptions().position(incubadora).title("Incubadora de empresas")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).showInfoWindow();
+                    break;
+                case 4:
+                    mapa2.clear();
+                    LatLng cafeteria = new LatLng(24.120042, -110.309599);
+                    mapa2.addMarker(new MarkerOptions().position(cafeteria).title("Cafeteria")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).showInfoWindow();
+                    break;
+                case 5:
+                    mapa2.clear();
+                    LatLng Biblio = new LatLng(24.119901, -110.310025);
+                    mapa2.addMarker(new MarkerOptions().position(Biblio).title("Biblioteca")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).showInfoWindow();
+                    break;
+                case 6:
+                    mapa2.clear();
+                    LatLng Ccomputo = new LatLng(24.119637, -110.310185);
+                    mapa2.addMarker(new MarkerOptions().position(Ccomputo).title("Centro de computo")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    break;
+                case 7:
+                    mapa2.clear();
+                    LatLng EdAdmin = new LatLng(24.120038, -110.310723);
+                    mapa2.addMarker(new MarkerOptions().position(EdAdmin).title("Division estudios profesionales")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    break;
+                case 8:
+                    mapa2.clear();
+                    LatLng ingenierias = new LatLng(24.119250, -110.309854);
+                    mapa2.addMarker(new MarkerOptions().position(ingenierias).title("Depto. de ingenierias")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    break;
+                case 9:
+                    mapa2.clear();
+                    LatLng direccion = new LatLng(24.119250, -110.309854);
+                    mapa2.addMarker(new MarkerOptions().position(direccion).title("Edificio administrativo")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    break;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    //endregion
 
     public void puntosTec() {
         GoogleMap mapa2 = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -203,6 +463,7 @@ public class MapaTec extends AppCompatActivity {
         GoogleMap mapa2 = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         int id = item.getItemId();
         if (id == R.id.todo) {
+            mapa.clear();
             puntosTec();
             return true;
         }
